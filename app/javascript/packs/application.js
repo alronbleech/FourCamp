@@ -8,6 +8,21 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
+import "jquery";
+import "popper.js";
+import "bootstrap";
+import "../stylesheets/application";
+import "script.js"
+import Swiper from 'swiper/swiper-bundle.js';
+import 'swiper/swiper-bundle.css';
+
+import Raty from "raty.js"
+window.raty = function(elem,opt) {
+  let raty =  new Raty(elem,opt)
+  raty.init();
+  return raty;
+}
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
