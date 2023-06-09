@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_08_122554) do
+ActiveRecord::Schema.define(version: 2023_06_09_061051) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -52,6 +52,36 @@ ActiveRecord::Schema.define(version: 2023_06_08_122554) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "campsite_types", force: :cascade do |t|
+    t.string "type_name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "campsites", force: :cascade do |t|
+    t.integer "campsite_type_id", null: false
+    t.integer "prefecture_id", null: false
+    t.string "name", null: false
+    t.string "address", null: false
+    t.float "latitude"
+    t.float "longitude"
+    t.string "phone_number", null: false
+    t.string "route", null: false
+    t.text "feature", null: false
+    t.text "considerations", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.integer "member_id", null: false
+    t.string "subject", null: false
+    t.text "demand", null: false
+    t.integer "supported_status", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "members", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -66,6 +96,21 @@ ActiveRecord::Schema.define(version: 2023_06_08_122554) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_members_on_email", unique: true
     t.index ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true
+  end
+
+  create_table "prefectures", force: :cascade do |t|
+    t.string "prefecture", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "member_id", null: false
+    t.integer "campsite_id", null: false
+    t.string "evaluation", null: false
+    t.text "comment", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
