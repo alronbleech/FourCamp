@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 2023_06_09_061051) do
   end
 
   create_table "campsite_types", force: :cascade do |t|
-    t.string "type_name", null: false
+    t.integer "type_name", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 2023_06_09_061051) do
   end
 
   create_table "prefectures", force: :cascade do |t|
-    t.string "prefecture", null: false
+    t.integer "prefecture_name", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -1,0 +1,68 @@
+<div class="container mt-3 mb-3">
+  <div class="row">
+    <div class="col">
+      <h1>キャンプ場新規登録</h1>
+      <% if @campsite.errors.any? %>
+        <%= @campsite.errors.count %>件の記入ミスがあります
+        <ul>
+          <% @campsite.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%= form_with model: @campsite, url: admin_campsites_path do |f| %>
+          <table class="table">
+            <tr>
+              <th><%= f.label :campsite_image, 'キャンプ場写真' %></th>
+              <td><%= f.file_field :campsite_image, accept: "image/*" %></td>
+            </tr>
+            <tr>
+              <th><%= f.label :name, 'キャンプ場名' %></th>
+              <td><%= f.text_field :name %></td>
+            </tr>
+            <tr>
+               <th><%= f.label :address, 'キャンプ場住所' %></th>
+               <td><%= f.text_area :address %></td>
+            </tr>
+            <tr>
+               <th><%= f.label :prefecture_id, '県名' %></th>
+               <td>
+                 <%= f.select 'prefecture_id', options_for_select(Prefecture.prefecture_names.map {|key, value| [key, value]}) %>
+                 <%#= f.select :prefecture_id, Prefecture.prefecture_names.keys %>
+                </td>
+            </tr>
+            <tr>
+               <th><%= f.label :campsite_type_id, 'キャンプ場種類' %></th>
+               <td><%= f.select 'campsite_type_id', options_for_select(CampsiteType.type_names.map {|key, value| [key, value]}) %></td>
+            </tr>
+            <tr>
+               <th><%= f.label :phone_number, '電話番号' %></th>
+               <td><%= f.text_field :phone_number %></td>
+            </tr>
+            <tr>
+               <th><%= f.label :route, 'アクセス方法' %></th>
+               <td><%= f.text_field :route %></td>
+            </tr>
+            <tr>
+               <th><%= f.label :feature, '特徴' %></th>
+               <td><%= f.text_area :feature %></td>
+            </tr>
+            <tr>
+               <th><%= f.label :considerations, '注意事項' %></th>
+               <td><%= f.text_area :considerations %></td>
+            </tr>
+          </table>
+          <div class="text-center col">
+            <%= f.submit '新規登録', class: 'btn btn-success' %>
+          </div>
+        <% end %>
+    </div>
+  </div>
+</div>
