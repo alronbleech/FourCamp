@@ -8,4 +8,9 @@ class Member < ApplicationRecord
 
   has_one_attached:profile_image
 
+  validates :name, presence: true
+  validates :name_ruby, presence: true
+  validates :nickname, presence: true
+
+
 end

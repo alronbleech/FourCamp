@@ -1,5 +1,5 @@
 class Admin::CampsitesController < ApplicationController
-
+  before_action :authenticate_admin!
   def new
     @campsite = Campsite.new
   end

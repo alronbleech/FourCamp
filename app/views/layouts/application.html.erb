@@ -21,19 +21,19 @@
             <ul class="navbar-nav ml-auto">
             <% if member_signed_in? %>
             <li class="nav-item-name h3">
-              ようこそ、<%= current_member.last_name %>さん！
+              ようこそ、<%= current_member.nickname %>さん！
             </li>
             <li class="nav-item">
-              <%#= link_to "マイページ", members_my_page_path, class: 'nav-link text-dark' %>
+              <%= link_to "マイページ", member_path(current_member), class: 'nav-link text-dark' %>
             </li>
             <li class="nav-item">
-              <%#= link_to '商品一覧', items_path, class: 'nav-link text-dark' %>
+              <%= link_to 'キャンプ場一覧', campsites_path, class: 'nav-link text-dark' %>
             </li>
             <li class="nav-item">
               <%#= link_to 'カート', shopping_cart_items_path, class: 'nav-link text-dark' %>
             </li>
             <li class="nav-item">
-              <%#= link_to 'ログアウト', destroy_member_session_path, method: :delete, class: 'nav-link text-dark' %>
+              <%= link_to 'ログアウト', destroy_member_session_path, method: :delete, class: 'nav-link text-dark' %>
             </li>
             <% elsif admin_signed_in? %>
             <li class="nav-item">
@@ -50,16 +50,16 @@
             </li>
             <% else %>
             <li class="nav-item">
-              <%#= link_to "サイト紹介", about_path, class: 'nav-link text-dark' %>
+              <%= link_to "サイト紹介", about_path, class: 'nav-link text-dark' %>
             </li>
             <li class="nav-item">
-              <%#= link_to "一覧", items_path, class: 'nav-link text-dark' %>
+              <%= link_to "キャンプ場一覧", campsites_path, class: 'nav-link text-dark' %>
             </li>
             <li class="nav-item">
-              <%#= link_to "新規登録", new_member_registration_path, class: 'nav-link text-dark' %>
+              <%= link_to "新規登録", new_member_registration_path, class: 'nav-link text-dark' %>
             </li>
             <li class="nav-item">
-              <%#= link_to "ログイン", new_member_session_path, class: 'nav-link text-dark' %>
+              <%= link_to "ログイン", new_member_session_path, class: 'nav-link text-dark' %>
             </li>
             <% end %>
             </ul>

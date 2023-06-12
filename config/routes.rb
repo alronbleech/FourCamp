@@ -13,9 +13,9 @@ Rails.application.routes.draw do
   get '/about' => 'public/homes#about'
 
   scope module: :public do
-    resources :members, only: [:show, :edit, :update]
     get "/members/quit" => "members#quit"
     patch "/members/out" => "members#out"
+    resources :members, only: [:show, :edit, :update]
     resources :campsites, only: [:index, :show]
     resources :reviews, only: [:new, :show, :edit, :create, :update, :destroy]
     resources :contacts, only: [:new, :show, :create]
