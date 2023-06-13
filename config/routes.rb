@@ -16,8 +16,9 @@ Rails.application.routes.draw do
     get "/members/quit" => "members#quit"
     patch "/members/out" => "members#out"
     resources :members, only: [:show, :edit, :update]
-    resources :campsites, only: [:index, :show]
-    resources :reviews, only: [:new, :show, :edit, :create, :update, :destroy]
+    resources :campsites, only: [:index, :show] do
+      resources :reviews, only: [:new, :show, :edit, :create, :update, :destroy]
+    end
     resources :contacts, only: [:new, :show, :create]
   end
 

@@ -1,1 +1,73 @@
-<h1>キャンプ場一覧</h1>
+<div class="container mt-3 mb-3">
+  <div class="row">
+    <div class="col">
+      <h2>キャンプサイトの種類</h2>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-3 mb-3">
+  <div class="row">
+    <div class="col">
+      <h4>高原キャンプ場</h4>
+
+    </div>
+    <div class="col">
+      <h4>海辺キャンプ場</h4>
+
+    </div>
+    <div class="col">
+      <h4>河原キャンプ場</h4>
+
+    </div>
+    <div class="col">
+      <h4>林間キャンプ場</h4>
+
+    </div>
+    <div class="col">
+      <h4>湖畔キャンプ場</h4>
+
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%= form_with(url: campsites_path, method: :get) do |f| %>
+      <table class="table">
+        <tr>
+          <th>県名</th>
+          <td>
+            <%= f.collection_select :prefecture_id, @prefectures, :id, :prefecture_name %>
+            <%= f.collection_select :campsite_type_id, @campsite_types, :id, :type_name %>
+            <%= f.submit '表示' %>
+          </td>
+        </tr>
+      </table>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <table class="table">
+        <% @campsites.each do |campsite| %>
+        <tr>
+          <td>
+            <%= link_to campsite_path(campsite) do %>
+              <%= image_tag campsite.campsite_image, size: "100x100" %>
+            <% end %>
+          </td>
+          <td><%= campsite.name %></td>
+          <td><%= campsite.campsite_type.type_name %></td>
+          <td><%= campsite.address %></td>
+          <td>レビュー数</td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

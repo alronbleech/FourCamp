@@ -17,7 +17,7 @@
         <li>今まで投稿されたレビューは削除されませんのでご了承ください。</li>
       </ul>
       <%= link_to "退会しない", member_path(current_member), class: "btn btn-primary" %>
-      <%= link_to "退会する", members_out_path(current_member), class:"btn btn-danger ml-5", "data-confirm" => "レビューも削除されます。本当に削除しますか？" %>
+      <%= link_to "退会する", members_out_path(current_member), method: :patch, class:"btn btn-danger ml-5", "data-confirm" => "本当に削除しますか？" %>
     </div>
   </div>
 </div>

@@ -24,7 +24,14 @@ class Public::MembersController < ApplicationController
 
   def quit
   end
-
+  
+  def out
+    @member = current_member
+    @member.update(is_deleted: true)
+    reset_session
+    flash[:notice] = "退会処理を実行しました"
+    redirect_to root_path
+  end
 
   private
   def member_params

@@ -61,3 +61,8 @@ CampsiteType.create(type_name: "海辺")
 CampsiteType.create(type_name: "河原")
 CampsiteType.create(type_name: "林間")
 CampsiteType.create(type_name: "湖畔")
+
+Tag.create(tag_name: "春")
+Tag.create(tag_name: "夏")
+Tag.create(tag_name: "秋")
+Tag.create(tag_name: "冬")

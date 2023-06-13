@@ -24,7 +24,7 @@
           <td><%= f.password_field :password, autocomplete: "current-password", class:"col-6" %></td>
         </tr>
         <tr>
-          <td></td>
+          <td><%= render "public/shared/links" %></td>
           <td class="pt-4"><%= f.submit "ログイン", class:"btn btn-primary col-3" %></td>
         </tr>
       </table>
@@ -34,4 +34,4 @@
 </div>
 <% end %>
 
-<%= render "public/shared/links" %>
+

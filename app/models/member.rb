@@ -12,5 +12,12 @@ class Member < ApplicationRecord
   validates :name_ruby, presence: true
   validates :nickname, presence: true
 
+  def active_for_authentication?
+    super && (is_deleted == false)
+  end
+
+  def boolean_label(value)
+    value ? '退会' : '有効'
+  end
 
 end

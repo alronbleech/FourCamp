@@ -1,7 +1,14 @@
 ja:
   enums:
     campsite:
-
     prefecture:
-
     campsite_type:
+  activerecord:
+    errors:
+      models:
+        review:
+          attributes:
+            campsite:
+              required: "が必須です"
+            member:
+              required: "が必須です"
