@@ -1,0 +1,29 @@
+<div class="container mt-3 mb-3">
+  <div class="row">
+    <div class="col">
+      <h1>お問い合わせ</h1>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%= form_with model: @contact, url: contacts_path do |f| %>
+          <table class="table">
+            <tr>
+              <th><%= f.label :subject, '件名' %></th>
+              <td><%= f.text_field :subject %></td>
+            </tr>
+            <tr>
+              <th><%= f.label :demand, 'お問い合わせ内容' %></th>
+              <td><%= f.text_area :demand %></td>
+            </tr>
+          </table>
+          <div class="text-center col">
+            <%= f.submit '送信', class: 'btn btn-success', "data-confirm" => "内容を再度ご確認ください。送信しますか？" %>
+          </div>
+        <% end %>
+    </div>
+  </div>
+</div>

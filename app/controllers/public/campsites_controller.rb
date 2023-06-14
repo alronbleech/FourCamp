@@ -1,5 +1,5 @@
 class Public::CampsitesController < ApplicationController
-  
+
   def index
     @prefectures = Prefecture.all
     @campsite_types = CampsiteType.all
@@ -8,6 +8,9 @@ class Public::CampsitesController < ApplicationController
 
   def show
     @campsite = Campsite.find(params[:id])
+    @reviews = @campsite.reviews
+    @tags = Tag.all
+    
   end
-  
+
 end

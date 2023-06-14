@@ -18,28 +18,35 @@ class Public::ReviewsController < ApplicationController
     @review.member_id = current_member.id
     @review.campsite_id = params[:campsite_id]
     if @review.save
+      @tagmap = Tagmap.new(tagmap_params)
+      @tagmap.review_id = @review.id
+      @tagmap.save
       redirect_to campsite_review_path(@review.campsite_id,@review.id)
     else
-      render :new
+      redirect_to campsite_review_path(@review.campsite_id,@review.id)
     end
   end
 
   def update
     review = Review.find(params[:id])
     review.update(review_params)
-    redirect_to review_path(@review)
+    redirect_to campsite_path(@campsite)
   end
 
   def destroy
     review = Review.find(params[:id])
     review.destroy
-    redirect_to review_path(@review)
+    redirect_to campsite_path(@campsite)
   end
 
   private
 
   def review_params
-    params.require(:review).permit(:title, {tag_ids: []}, :evaluation, :comment,:review_image)
+    params.require(:review).permit(:title, :evaluation, :comment,:review_image)
+  end
+
+  def tagmap_params
+    params.require(:review).permit(:tag_id)
   end
 
 end

@@ -56,3 +56,57 @@
     </div>
   </div>
 </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <table class="teble">
+        <thead>
+          <tr>
+            <td>
+              <%= form_with(url: campsite_path(@campsite), method: :get, class: 'tag-search-form') do |f| %>
+                <%= f.label 'tag_ids[]', 'タグ' %>
+                <%= f.select 'tag_ids[]', options_from_collection_for_select(@tags, :id, :tag_name, params[:tag_ids]), { include_blank: true }, class: 'form-control' %>
+                <%#= f.select :tag_id, options_from_collection_for_select(Tag.all, :id, :tag_name), { include_blank: true }, { class: 'form-control' } %>
+                <%= f.submit '検索', class: 'btn btn-primary' %>
+              <% end %>
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <% @reviews.each do |review| %>
+          <%# if review.tags.any? { |tag| params[:tag_ids].include?(tag.id.to_s) } || params[:tag_ids].blank? %>
+          <tr>
+            <td>
+              <%= link_to campsite_review_path(review.campsite_id,review.id) do %>
+                <%= review.title %>
+              <% end %>
+            </td>
+            <td>
+              <% if review.review_image.attached? %>
+                <%= image_tag review.review_image, size: "100x100" %>
+              <% else %>
+                <%= image_tag 'no_image!!', size: "100x100" %>
+              <% end %>
+            </td>
+            <td>
+              <% review.tags.each do |tag| %>
+                <%= tag.tag_name %>
+              <% end %>
+            </td>
+            <td><%= review.evaluation %></td>
+            <td><%= review.comment %></td>
+          </tr>
+          <%# end %>
+          <% end %>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>フッタ1</td>
+            <td>フッタ2</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>

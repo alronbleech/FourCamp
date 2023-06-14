@@ -20,7 +20,7 @@
       <%= form_with model: @review, url: campsite_reviews_path(params[:campsite_id]) do |f| %>
           <table class="table">
             <tr>
-              <th><%= f.label :review_image, 'キャンプ場写真' %></th>
+              <th><%= f.label :review_image, 'レビューイメージ' %></th>
               <td><%= f.file_field :review_image, accept: "image/*" %></td>
             </tr>
             <tr>
