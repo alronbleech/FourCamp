@@ -108,7 +108,7 @@ ActiveRecord::Schema.define(version: 2023_06_13_121356) do
     t.integer "member_id", null: false
     t.integer "campsite_id", null: false
     t.string "title", null: false
-    t.string "evaluation", null: false
+    t.float "star", null: false
     t.text "comment", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -124,7 +124,7 @@ ActiveRecord::Schema.define(version: 2023_06_13_121356) do
   end
 
   create_table "tags", force: :cascade do |t|
-    t.string "tag_name", null: false
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

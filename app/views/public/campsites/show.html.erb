@@ -64,12 +64,12 @@
         <thead>
           <tr>
             <td>
-              <%= form_with(url: campsite_path(@campsite), method: :get, class: 'tag-search-form') do |f| %>
-                <%= f.label 'tag_ids[]', 'タグ' %>
-                <%= f.select 'tag_ids[]', options_from_collection_for_select(@tags, :id, :tag_name, params[:tag_ids]), { include_blank: true }, class: 'form-control' %>
+              <%#= form_with(url: campsite_path(@campsite), method: :get, class: 'tag-search-form') do |f| %>
+                <%#= f.label 'tag_ids[]', 'タグ' %>
+                <%#= f.select 'tag_ids[]', options_from_collection_for_select(@tags, :id, :tag_name, params[:tag_ids]), { include_blank: true }, class: 'form-control' %>
                 <%#= f.select :tag_id, options_from_collection_for_select(Tag.all, :id, :tag_name), { include_blank: true }, { class: 'form-control' } %>
-                <%= f.submit '検索', class: 'btn btn-primary' %>
-              <% end %>
+                <%#= f.submit '検索', class: 'btn btn-primary' %>
+              <%# end %>
             </td>
           </tr>
         </thead>
@@ -90,11 +90,21 @@
               <% end %>
             </td>
             <td>
-              <% review.tags.each do |tag| %>
-                <%= tag.tag_name %>
-              <% end %>
+              <%# review.tags.each do |tag| %>
+                <%#= tag.tag_name %>
+              <%# end %>
             </td>
-            <td><%= review.evaluation %></td>
+            <td id="star-review-<%= review.star %>"></td>
+             <script>
+              $('#star-review-<%= review.star %>').empty();
+                raty(document.getElementById('star-review-<%= review.star %>'), {
+                 starOn: '<%= asset_path('star-on.png') %>',
+                 starOff: '<%= asset_path('star-off.png') %>',
+                 scoreName: 'review[star]',
+                 half: false,
+                 readOnly: true,
+                });
+              </script>
             <td><%= review.comment %></td>
           </tr>
           <%# end %>

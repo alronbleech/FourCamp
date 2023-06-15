@@ -4,7 +4,7 @@ class CreateReviews < ActiveRecord::Migration[6.1]
       t.integer :member_id, foreign_key: true, null: false
       t.integer :campsite_id, foreign_key: true, null: false
       t.string :title, null:false
-      t.string :evaluation, null: false
+      t.float :star, null: false
       t.text :comment, null: false
       t.timestamps
     end

@@ -5,6 +5,10 @@ class Public::ReviewsController < ApplicationController
     @review = Review.new
   end
 
+  def index
+
+  end
+
   def show
     @review = Review.find(params[:id])
   end
@@ -17,11 +21,10 @@ class Public::ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.member_id = current_member.id
     @review.campsite_id = params[:campsite_id]
+    tag_list = params[:review][:tag_name].split(',')
     if @review.save
-      @tagmap = Tagmap.new(tagmap_params)
-      @tagmap.review_id = @review.id
-      @tagmap.save
-      redirect_to campsite_review_path(@review.campsite_id,@review.id)
+      @review.save_tags(tag_list)
+      redirect_to campsite_reviews_path(@review.campsite_id,@review.id)
     else
       redirect_to campsite_review_path(@review.campsite_id,@review.id)
     end
@@ -30,7 +33,7 @@ class Public::ReviewsController < ApplicationController
   def update
     review = Review.find(params[:id])
     review.update(review_params)
-    redirect_to campsite_path(@campsite)
+    redirect_to campsite_review_path(review.campsite_id,review.id)
   end
 
   def destroy
@@ -42,11 +45,7 @@ class Public::ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:title, :evaluation, :comment,:review_image)
-  end
-
-  def tagmap_params
-    params.require(:review).permit(:tag_id)
+    params.require(:review).permit(:title, :star, :comment, :review_image) #tagmaps_attributes: [:tag_id])
   end
 
 end

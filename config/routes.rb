@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     patch "/members/out" => "members#out"
     resources :members, only: [:show, :edit, :update]
     resources :campsites, only: [:index, :show] do
-      resources :reviews, only: [:new, :show, :edit, :create, :update, :destroy]
+      resources :reviews, only: [:new, :index, :show, :edit, :create, :update, :destroy]
     end
     resources :contacts, only: [:new, :show, :create]
   end
@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     resources :reviews, only: [:index, :show, :edit, :update, :destroy]
     resources :contacts, only: [:edit, :update]
   end
-
+  
+  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

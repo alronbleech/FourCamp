@@ -27,15 +27,31 @@
               <th><%= f.label :title, 'レビュータイトル' %></th>
               <td><%= f.text_field :title %></td>
             </tr>
+
             <tr>
-              <th><%= f.label :tag_id, 'タグ' %></th>
+              <th><%= f.label "季節" %></th>
               <td>
-                <%= f.select :tag_id, options_from_collection_for_select(Tag.all, :id, :tag_name), { include_blank: true }, { class: 'form-control' } %>
+                <%= f.text_field :tag_name %>
+                <%#= maptag_form.select :tag_id, options_from_collection_for_select(Tag.all, :id, :tag_name), { include_blank: true }, { class: 'form-control' } %>
+                <%#= f.fields_for :tags do |tagmap_form| %>
+                <%#= tagmap_form.label :tag_id, '季節' %>
+                <%#= tagmap_form.select :tag_id, Tag.all.collect { |tag| [tag.tag_name, tag.id] } %>
+                <%# end %>
               </td>
             </tr>
+
             <tr>
-              <th><%= f.label :evaluation, '評価' %></th>
-              <td><%= f.text_field :evaluation %></td>
+              <td><%= f.label :star, '評価', class:'col-md-3 col-form-label' %></td>
+                <td id="star"><%= f.hidden_field :star, id: :review_star %></td>
+              <script>
+              $('#star').empty();
+                raty(document.getElementById('star'), {
+                 starOn: '<%= asset_path('star-on.png') %>',
+                 starOff: '<%= asset_path('star-off.png') %>',
+                 scoreName: 'review[star]',
+                 half: false
+                });
+              </script>
             </tr>
             <tr>
               <th><%= f.label :comment, 'コメント' %></th>

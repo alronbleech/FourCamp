@@ -16,6 +16,7 @@ import Swiper from 'swiper/swiper-bundle.js';
 import 'swiper/swiper-bundle.css';
 
 import Raty from "raty.js"
+window.Raty = Raty;
 window.raty = function(elem,opt) {
   let raty =  new Raty(elem,opt)
   raty.init();

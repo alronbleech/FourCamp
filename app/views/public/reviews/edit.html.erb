@@ -22,14 +22,8 @@
             <td><%= f.text_field :title %></td>
           </tr>
           <tr>
-            <th><%= f.label :tag_id, 'タグ' %></th>
-            <td>
-              <%= f.select :tag_id, options_from_collection_for_select(Tag.all, :id, :tag_name), { include_blank: true }, { class: 'form-control' } %>
-            </td>
-          </tr>
-          <tr>
-            <th><%= f.label :evaluation, '評価' %></th>
-            <td><%= f.text_area :evaluation %></td>
+            <th><%= f.label :star, '評価' %></th>
+            <td><%= f.text_area :star %></td>
           </tr>
           <tr>
             <th><%= f.label :comment, 'コメント' %></th>
