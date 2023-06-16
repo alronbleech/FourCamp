@@ -15,11 +15,12 @@ Rails.application.routes.draw do
   scope module: :public do
     get "/members/quit" => "members#quit"
     patch "/members/out" => "members#out"
-    resources :members, only: [:show, :edit, :update]
+    resources :members, only: [:show, :edit, :update] do
+      resources :contacts, only: [:new, :show, :create]
+    end
     resources :campsites, only: [:index, :show] do
       resources :reviews, only: [:new, :index, :show, :edit, :create, :update, :destroy]
     end
-    resources :contacts, only: [:new, :show, :create]
   end
 
   namespace :admin do
@@ -29,7 +30,7 @@ Rails.application.routes.draw do
     resources :reviews, only: [:index, :show, :edit, :update, :destroy]
     resources :contacts, only: [:edit, :update]
   end
-  
-  
+
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

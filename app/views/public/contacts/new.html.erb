@@ -9,7 +9,7 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <%= form_with model: @contact, url: contacts_path do |f| %>
+      <%= form_with model: @contact, url: member_contacts_path do |f| %>
           <table class="table">
             <tr>
               <th><%= f.label :subject, '件名' %></th>

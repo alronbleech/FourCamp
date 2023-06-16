@@ -10,6 +10,7 @@ class Public::ContactsController < ApplicationController
 
   def create
     @contact = Contact.new(contact_params)
+    @contact.member_id = current_member.id
     @contact.save
     redirect_to root_path
   end

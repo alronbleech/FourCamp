@@ -1,11 +1,11 @@
-<div class="container mt-3 mb-3">
+<div class="container mt-5 mb-5">
   <div class="row">
     <div class="col"></div>
-      <div class="col-4">
-        <h1>お問い合わせ一覧</h1>
-      </div>
     <div class="col">
-      <h2>絞り込み表示</h2>
+      <span class="h1">お問い合わせ一覧</span>
+    </div>
+    <div class="col">
+      <span>絞り込み表示</span>
     </div>
     </div>
   </div>
@@ -14,16 +14,17 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <table class="table">
-        <tr>
-          <th></th>
-          <th>会員名</th>
-          <th>件名</th>
-          <th>ステータス</th>
-        </tr>
+      <table class="table table-hover">
+        <thead>
+          <tr class="text-center">
+            <th class="col-1">会員名</th>
+            <th class="col-2">件名</th>
+            <th class="col-1">ステータス</th>
+          </tr>
+        </thead>
         <% @contacts.each do |contact| %>
-          <tr class="table-hover">
-            <td>会員の写真</td>
+        <tbody>
+          <tr class="text-center">
             <td>
               <%= contact.member.name %>
             </td>
@@ -32,10 +33,17 @@
                 <%= contact.subject %>
               <% end %>
             </td>
-            <td>
-              <%= contact.supported_status %>
-            </td>
+              <% if contact.supported_status == 0 %>
+              <td class="text-secondary font-weight-bold">
+                <%= Contact.supported_statuses_i18n[contact.supported_status] %>
+              </td>
+              <% else %>
+              <td class="text-success font-weight-bold">
+                <%= Contact.supported_statuses_i18n[contact.supported_status] %>
+              </td>
+              <% end %>
           </tr>
+        </tbody>
         <% end %>
       </table>
     </div>

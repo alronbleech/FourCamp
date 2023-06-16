@@ -11,55 +11,54 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <body class="d-flex flex-column vh-100">
+  <body class="d-flex flex-column vh-100 bg-light">
     <header class="shadow-sm">
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light" style="background: linear-gradient(#93FFAB, #007700);">
+        <div class="container-fluid">
           <a class="navbar-brand p-1" href="/"><%= image_tag('logo.jpg') %></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
             <% if member_signed_in? %>
-            <li class="nav-item-name h3">
+            <li class="nav-item-name h3 text-light">
               ようこそ、<%= current_member.nickname %>さん！
             </li>
             <li class="nav-item">
-              <%= link_to "マイページ", member_path(current_member), class: 'nav-link text-dark' %>
+              <%= link_to "マイページ", member_path(current_member), class: 'btn btn-primary' %>
             </li>
             <li class="nav-item">
-              <%= link_to 'キャンプ場一覧', campsites_path, class: 'nav-link text-dark' %>
+              <%= link_to 'キャンプ場一覧', campsites_path, class: 'btn btn-primary' %>
             </li>
             <li class="nav-item">
-              <%#= link_to 'カート', shopping_cart_items_path, class: 'nav-link text-dark' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to 'ログアウト', destroy_member_session_path, method: :delete, class: 'nav-link text-dark' %>
+              <%= link_to 'ログアウト', destroy_member_session_path, method: :delete, class: 'btn btn-primary' %>
             </li>
             <% elsif admin_signed_in? %>
             <li class="nav-item">
-              <%= link_to "キャンプ場一覧", admin_campsites_path, class: 'nav-link text-dark' %>
+              <%= link_to "キャンプ場一覧", admin_campsites_path, class: 'btn btn-primary' %>
             </li>
             <li class="nav-item">
-              <%= link_to '会員一覧', admin_members_path, class: 'nav-link text-dark' %>
+              <%= link_to '会員一覧', admin_members_path, class: 'btn btn-primary' %>
             </li>
             <li class="nav-item">
-              <%= link_to 'レビュー一覧', admin_reviews_path, class: 'nav-link text-dark' %>
+              <%= link_to 'レビュー一覧', admin_reviews_path, class: 'btn btn-primary' %>
             </li>
             <li class="nav-item">
-              <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' %>
+              <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'btn btn-primary' %>
             </li>
             <% else %>
             <li class="nav-item">
-              <%= link_to "サイト紹介", about_path, class: 'nav-link text-dark' %>
+              <%= link_to "サイト紹介", about_path, class: 'btn btn-primary' %>
             </li>
             <li class="nav-item">
-              <%= link_to "キャンプ場一覧", campsites_path, class: 'nav-link text-dark' %>
+              <%= link_to "キャンプ場一覧", campsites_path, class: 'btn btn-primary' %>
             </li>
             <li class="nav-item">
-              <%= link_to "新規登録", new_member_registration_path, class: 'nav-link text-dark' %>
+              <%= link_to "新規登録", new_member_registration_path, class: 'btn btn-primary' %>
             </li>
             <li class="nav-item">
-              <%= link_to "ログイン", new_member_session_path, class: 'nav-link text-dark' %>
+              <%= link_to "ログイン", new_member_session_path, class: 'btn btn-primary' %>
             </li>
             <% end %>
             </ul>
@@ -70,9 +69,17 @@
     <main>
       <%= yield %>
     </main>
-    <footer>
-      <div>
-        <%= link_to "お問い合わせ", new_contact_path, class: 'btn btn-success' %>
+    <footer class="footer shadow-sm fixed-bottom" style="background: linear-gradient(#007700, #93FFAB);">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-2"></div>
+          <div class="col"></div>
+          <div class="col-2 d-flex align-items-center" style="height:100px;">
+            <% if member_signed_in? %>
+              <%= link_to "お問い合わせ", new_member_contact_path(current_member), class: 'btn btn-success' %>
+            <% end %>
+          </div>
+        </div>
       </div>
     </footer>
   </body>

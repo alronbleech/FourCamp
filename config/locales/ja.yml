@@ -1,5 +1,9 @@
 ja:
   enums:
+    contact:
+      supported_status:
+        unsupported: "未対応"
+        fixed: "対応済み"
     campsite:
     prefecture:
     campsite_type:
