@@ -1,122 +1,65 @@
-<div class="container mt-3 mb-3">
-  <div class="row">
-    <div class="col">
-      <h1><%= @campsite.name %>の詳細</h1>
-    </div>
-    <div class="col">
-      <%= link_to "レビューを投稿", new_campsite_review_path(@campsite.id) %>
-
-    </div>
-  </div>
-</div>
-
-<div class="container">
-  <div class="row">
-    <div class="col"></div>
-    <div class="col-4">
-      <%= image_tag @campsite.campsite_image, size: "200x200" %>
-    </div>
-    <div class="col"></div>
-  </div>
-</div>
-
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <table class="table">
-        <tr>
-          <th>県名</th>
-          <td><%= @campsite.prefecture.prefecture_name %></td>
-        </tr>
-        <tr>
-          <th>住所</th>
-          <td><%= @campsite.address %></td>
-        </tr>
-        <tr>
-          <th>種類</th>
-          <td><%= @campsite.campsite_type.type_name %></td>
-        </tr>
-        <tr>
-          <th>電話番号</th>
-          <td><%= @campsite.phone_number %></td>
-        </tr>
-        <tr>
-          <th>アクセス方法</th>
-          <td><%= @campsite.route %></td>
-        </tr>
-        <tr>
-          <th>特徴</th>
-          <td><%= @campsite.feature %></td>
-        </tr>
-        <tr>
-          <th>注意事項</th>
-          <td><%= @campsite.considerations %></td>
-        </tr>
-      </table>
+<div style="height: 655px;">
+  <div class="container-fluid mt-3 mb-3">
+    <div class="row">
+      <div class="col">
+        <span class="h1"><%= @campsite.name %></span>
+      </div>
+      <div class="col-2">
+        <%= link_to "レビューを投稿", new_campsite_review_path(@campsite.id), class: "btn btn-success" %>
+      </div>
+      <div class="col-3">
+        <%= form_with url: campsite_reviews_path(@campsite), method: :get, local: true do |f| %>
+          <%= f.text_field :content %>
+          <%= f.hidden_field :model, :value => "tag" %>
+          <%= f.hidden_field :method, :value => "perfect" %>
+          <%= f.submit 'タグ検索', class: "btn btn-primary" %>
+        <% end %>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <table class="teble">
-        <thead>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-2">
+        <% if @campsite.campsite_image.attached? %>
+          <%= image_tag @campsite.campsite_image, size: "250x250" %>
+        <% else %>
+          <%= image_tag 'no_image!!', size: "250x250" %>
+        <% end %>
+      </div>
+      <div class="col-1"></div>
+      <div class="col-5">
+        <table class="table">
           <tr>
-            <td>
-              <%#= form_with(url: campsite_path(@campsite), method: :get, class: 'tag-search-form') do |f| %>
-                <%#= f.label 'tag_ids[]', 'タグ' %>
-                <%#= f.select 'tag_ids[]', options_from_collection_for_select(@tags, :id, :tag_name, params[:tag_ids]), { include_blank: true }, class: 'form-control' %>
-                <%#= f.select :tag_id, options_from_collection_for_select(Tag.all, :id, :tag_name), { include_blank: true }, { class: 'form-control' } %>
-                <%#= f.submit '検索', class: 'btn btn-primary' %>
-              <%# end %>
-            </td>
+            <th>県名</th>
+            <td><%= @campsite.prefecture.prefecture_name %></td>
           </tr>
-        </thead>
-        <tbody>
-          <% @reviews.each do |review| %>
-          <%# if review.tags.any? { |tag| params[:tag_ids].include?(tag.id.to_s) } || params[:tag_ids].blank? %>
           <tr>
-            <td>
-              <%= link_to campsite_review_path(review.campsite_id,review.id) do %>
-                <%= review.title %>
-              <% end %>
-            </td>
-            <td>
-              <% if review.review_image.attached? %>
-                <%= image_tag review.review_image, size: "100x100" %>
-              <% else %>
-                <%= image_tag 'no_image!!', size: "100x100" %>
-              <% end %>
-            </td>
-            <td>
-              <%# review.tags.each do |tag| %>
-                <%#= tag.tag_name %>
-              <%# end %>
-            </td>
-            <td id="star-review-<%= review.star %>"></td>
-             <script>
-              $('#star-review-<%= review.star %>').empty();
-                raty(document.getElementById('star-review-<%= review.star %>'), {
-                 starOn: '<%= asset_path('star-on.png') %>',
-                 starOff: '<%= asset_path('star-off.png') %>',
-                 scoreName: 'review[star]',
-                 half: false,
-                 readOnly: true,
-                });
-              </script>
-            <td><%= review.comment %></td>
+            <th>住所</th>
+            <td><%= @campsite.address %></td>
           </tr>
-          <%# end %>
-          <% end %>
-        </tbody>
-        <tfoot>
           <tr>
-            <td>フッタ1</td>
-            <td>フッタ2</td>
+            <th>種類</th>
+            <td><%= @campsite.campsite_type.type_name %></td>
           </tr>
-        </tfoot>
-      </table>
+          <tr>
+            <th>電話番号</th>
+            <td><%= @campsite.phone_number %></td>
+          </tr>
+          <tr>
+            <th>アクセス方法</th>
+            <td><%= @campsite.route %></td>
+          </tr>
+          <tr>
+            <th>特徴</th>
+            <td><%= @campsite.feature %></td>
+          </tr>
+          <tr>
+            <th>注意事項</th>
+            <td><%= @campsite.considerations %></td>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
 </div>

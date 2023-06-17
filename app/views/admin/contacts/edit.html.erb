@@ -27,15 +27,15 @@
               <%= @contact.demand %>
             </td>
           </tr>
-          <%= form_with model: @contact, url: admin_contact_path, class: "form-row" do |f| %>
           <tr>
             <th class="border-0 text-center">対応済み/未対応</th>
             <td class="border-0">
+              <%= form_with model: @contact, url: admin_contact_path, class: "form-row" do |f| %>
               <%= f.select :supported_status, Contact.supported_statuses_i18n.invert, {prompt: false}, class:"form-control form-control-sm align-middle", style:"width: 100px;" %>
-              <%= f.submit "更新", class:"mt-4 btn btn-success" %>
+              <%= f.submit "更新", class:"ml-5 btn btn-success" %>
+              <% end %>
             </td>
           </tr>
-          <% end %>
         </tbody>
       </table>
     </div>

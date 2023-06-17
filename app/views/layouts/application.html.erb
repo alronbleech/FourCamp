@@ -26,6 +26,9 @@
               ようこそ、<%= current_member.nickname %>さん！
             </li>
             <li class="nav-item">
+              <%= link_to "サイト紹介", about_path, class: 'btn btn-primary' %>
+            </li>
+            <li class="nav-item">
               <%= link_to "マイページ", member_path(current_member), class: 'btn btn-primary' %>
             </li>
             <li class="nav-item">
@@ -35,6 +38,9 @@
               <%= link_to 'ログアウト', destroy_member_session_path, method: :delete, class: 'btn btn-primary' %>
             </li>
             <% elsif admin_signed_in? %>
+            <li class="nav-item">
+              <%= link_to "お問い合わせ一覧", admin_path, class: 'btn btn-primary' %>
+            </li>
             <li class="nav-item">
               <%= link_to "キャンプ場一覧", admin_campsites_path, class: 'btn btn-primary' %>
             </li>
@@ -66,10 +72,10 @@
         </div>
       </nav>
     </header>
-    <main>
+    <main style="margin-bottom: 100px;">
       <%= yield %>
     </main>
-    <footer class="footer shadow-sm fixed-bottom" style="background: linear-gradient(#007700, #93FFAB);">
+    <footer class="shadow-sm" style="background: linear-gradient(#007700, #93FFAB); height:100px;">
       <div class="container-fluid">
         <div class="row">
           <div class="col-2"></div>

@@ -13,11 +13,11 @@
           <table class="table">
             <tr>
               <th><%= f.label :subject, '件名' %></th>
-              <td><%= f.text_field :subject %></td>
+              <td><%= f.text_field :subject, class:"form-control form-control-sm align-middle", style:"width: 200px;" %></td>
             </tr>
             <tr>
               <th><%= f.label :demand, 'お問い合わせ内容' %></th>
-              <td><%= f.text_area :demand %></td>
+              <td><%= f.text_area :demand, class:"form-control form-control-sm align-middle", style:"width: 400px; height: 200px;" %></td>
             </tr>
           </table>
           <div class="text-center col">

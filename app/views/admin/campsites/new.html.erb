@@ -1,5 +1,6 @@
 <div class="container mt-3 mb-3">
   <div class="row">
+    <div class="col-3"></div>
     <div class="col">
       <h1>キャンプ場新規登録</h1>
       <% if @campsite.errors.any? %>
@@ -11,13 +12,14 @@
         </ul>
       <% end %>
     </div>
+    <div class="col"></div>
   </div>
 </div>
 
 <div class="container">
   <div class="row">
     <div class="col">
-      <%= form_with model: @campsite, url: admin_campsites_path do |f| %>
+      <%= form_with model: @campsite, url: admin_campsites_path, class: "form-row" do |f| %>
           <table class="table">
             <tr>
               <th><%= f.label :campsite_image, 'キャンプ場写真' %></th>
@@ -25,38 +27,37 @@
             </tr>
             <tr>
               <th><%= f.label :name, 'キャンプ場名' %></th>
-              <td><%= f.text_field :name %></td>
+              <td><%= f.text_field :name, class:"form-control form-control-sm align-middle", style:"width: 400px;" %></td>
             </tr>
             <tr>
                <th><%= f.label :address, 'キャンプ場住所' %></th>
-               <td><%= f.text_area :address %></td>
+               <td><%= f.text_area :address, class:"form-control form-control-sm align-middle", style:"width: 400px;" %></td>
             </tr>
             <tr>
                <th><%= f.label :prefecture_id, '県名' %></th>
-               <td>
-                 <%= f.select 'prefecture_id', options_for_select(Prefecture.prefecture_names.map {|key, value| [key, value]}) %>
-                 <%#= f.select :prefecture_id, Prefecture.prefecture_names.keys %>
+               <td class="form-group">
+                 <%= f.select 'prefecture_id', options_for_select(Prefecture.prefecture_names.map {|key, value| [key, value]}), {}, class:"form-control form-control-sm align-middle text-center", style:"width: 100px;" %>
                 </td>
             </tr>
             <tr>
                <th><%= f.label :campsite_type_id, 'キャンプ場種類' %></th>
-               <td><%= f.select 'campsite_type_id', options_for_select(CampsiteType.type_names.map {|key, value| [key, value]}) %></td>
+               <td><%= f.select 'campsite_type_id', options_for_select(CampsiteType.type_names.map {|key, value| [key, value]}), {}, class:"form-control form-control-sm align-middle text-center", style:"width: 70px;" %></td>
             </tr>
             <tr>
                <th><%= f.label :phone_number, '電話番号' %></th>
-               <td><%= f.text_field :phone_number %></td>
+               <td><%= f.text_field :phone_number, class:"form-control form-control-sm align-middle", style:"width: 200px;" %></td>
             </tr>
             <tr>
                <th><%= f.label :route, 'アクセス方法' %></th>
-               <td><%= f.text_field :route %></td>
+               <td><%= f.text_area :route, class:"form-control form-control-sm align-middle", style:"width: 400px;" %></td>
             </tr>
             <tr>
                <th><%= f.label :feature, '特徴' %></th>
-               <td><%= f.text_area :feature %></td>
+               <td><%= f.text_area :feature, class:"form-control form-control-sm align-middle", style:"width: 400px; height: 200px;" %></td>
             </tr>
             <tr>
                <th><%= f.label :considerations, '注意事項' %></th>
-               <td><%= f.text_area :considerations %></td>
+               <td><%= f.text_area :considerations, class:"form-control form-control-sm align-middle", style:"width: 400px; height: 200px;" %></td>
             </tr>
           </table>
           <div class="text-center col">

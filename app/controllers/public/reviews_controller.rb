@@ -6,7 +6,12 @@ class Public::ReviewsController < ApplicationController
   end
 
   def index
-
+    @model = params[:model]
+    @content = params[:content]
+    @method = params[:method]
+    if @model == 'tag'
+      @reviews = Tag.search_reviews_for(@content, @method)
+    end
   end
 
   def show
@@ -24,9 +29,9 @@ class Public::ReviewsController < ApplicationController
     tag_list = params[:review][:tag_name].split(',')
     if @review.save
       @review.save_tags(tag_list)
-      redirect_to campsite_reviews_path(@review.campsite_id,@review.id)
+      redirect_to campsite_path(@review.campsite_id)
     else
-      redirect_to campsite_review_path(@review.campsite_id,@review.id)
+      redirect_to about_path
     end
   end
 
@@ -39,7 +44,7 @@ class Public::ReviewsController < ApplicationController
   def destroy
     review = Review.find(params[:id])
     review.destroy
-    redirect_to campsite_path(@campsite)
+    redirect_to campsite_path(review.campsite_id)
   end
 
   private
