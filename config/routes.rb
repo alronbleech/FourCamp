@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   }
 
   devise_for :member, skip: [:passwords], controllers: {
-    registrations: "public/registrations",
-    sessions: 'public/sessions'
+    registrations: "public/members/registrations",
+    sessions: 'public/members/sessions'
   }
 
   root to: 'public/homes#top'
@@ -15,6 +15,11 @@ Rails.application.routes.draw do
   scope module: :public do
     get "/members/quit" => "members#quit"
     patch "/members/out" => "members#out"
+
+    devise_scope :member do
+      post "members/guest_sign_in" => "members/sessions#guest_sign_in"
+    end
+
     resources :members, only: [:show, :edit, :update] do
       resources :contacts, only: [:new, :show, :create]
     end
@@ -26,8 +31,9 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/' => 'homes#top'
     resources :members, only: [:index, :show, :edit, :update]
-    resources :campsites
-    resources :reviews, only: [:index, :show, :edit, :update, :destroy]
+    resources :campsites do
+      resources :reviews, only: [:index, :show, :edit, :update, :destroy]
+    end
     resources :contacts, only: [:edit, :update]
   end
 

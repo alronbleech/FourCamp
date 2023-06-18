@@ -1,59 +1,60 @@
-<div class="container mt-3 mb-3">
-  <div class="row">
-    <div class="col"></div>
-    <div class="col">
-      <h1>キャンプ場一覧</h1>
-    </div>
-    <div class="col">
-      <%= link_to "キャンプ場新規登録", new_admin_campsite_path, class: 'btn btn-success' %>
+<div style="height: 655px;">
+  <div class="container mt-3 mb-3">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col">
+        <h1>キャンプ場一覧</h1>
+      </div>
+      <div class="col">
+        <%= link_to "キャンプ場新規登録", new_admin_campsite_path, class: 'btn btn-success' %>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <div class="text-center mb-3">
-        <%= form_with(url: admin_campsites_path, method: :get) do |f| %>
-          <span class="font-weight-bold mr-3">県名</span>
-          <%= f.collection_select :prefecture_id, @prefectures, :id, :prefecture_name %>
-          <span class="font-weight-bold ml-3 mr-3">キャンプ場種類</span>
-          <%= f.collection_select :campsite_type_id, @campsite_types, :id, :type_name %>
-          <%= f.submit '表示', class:"btn btn-primary ml-3" %>
-        <% end %>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="text-center mb-3">
+          <%= form_with(url: admin_campsites_path, method: :get) do |f| %>
+            <span class="font-weight-bold mr-3">県名</span>
+            <%= f.collection_select :prefecture_id, @prefectures, :id, :prefecture_name, { prompt: '選択' }, class: "form-control-sm", style:"width: 100px;" %>
+            <span class="font-weight-bold ml-3 mr-3">キャンプ場種類</span>
+            <%= f.collection_select :campsite_type_id, @campsite_types, :id, :type_name, { prompt: '選択' }, class: "form-control-sm", style:"width: 100px;" %>
+            <%= f.submit '表示', class:"btn btn-primary ml-3" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <table class="table table-hover">
+          <thead>
+            <tr class="text-center">
+              <th>キャンプ場写真</th>
+              <th>キャンプ場名</th>
+              <th>キャンプ場種類</th>
+              <th>レビュー数</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @campsites.each do |campsite| %>
+            <tr class="text-center">
+              <td><%= image_tag campsite.campsite_image, size: "100x100" %></td>
+              <td class="font-weight-bold align-middle">
+                <%= link_to admin_campsite_path(campsite), class:"text-dark" do %>
+                  <%= campsite.name %>
+                <% end %>
+              </td>
+              <td class="font-weight-bold align-middle"><%= campsite.campsite_type.type_name %></td>
+              <td class="font-weight-bold align-middle"><%= campsite.reviews.count %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
 </div>
-
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <table class="table table-hover">
-        <thead>
-          <tr class="text-center">
-            <th>キャンプ場写真</th>
-            <th>キャンプ場名</th>
-            <th>キャンプ場種類</th>
-            <th>レビュー数</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @campsites.each do |campsite| %>
-          <tr class="text-center">
-            <td><%= image_tag campsite.campsite_image, size: "100x100" %></td>
-            <td class="font-weight-bold align-middle">
-              <%= link_to admin_campsite_path(campsite), class:"text-dark" do %>
-                <%= campsite.name %>
-              <% end %>
-            </td>
-            <td class="font-weight-bold align-middle"><%= campsite.campsite_type.type_name %></td>
-            <td class="font-weight-bold align-middle"><%= campsite.reviews.count %></td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
-

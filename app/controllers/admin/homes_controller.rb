@@ -2,8 +2,11 @@ class Admin::HomesController < ApplicationController
   before_action :authenticate_admin!
 
   def top
-    @contacts = Contact.all
-    #@contacts = Contact.where(supported_status:unsupported)
+    if params[:supported_status].present?
+      @contacts = Contact.where(supported_status: params[:supported_status])
+    else
+      @contacts = Contact.all
+    end
   end
 
   private

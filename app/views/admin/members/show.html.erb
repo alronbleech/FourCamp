@@ -1,20 +1,62 @@
-<div class="container mt-3 mb-3">
-  <div class="row">
-    <div class="col">
-      <h1><%= @member.name %>さんの詳細</h1>
+<div style="height: 655px;">
+  <div class="container mt-3 mb-3">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col">
+        <h1><%= @member.name %></h1>
+      </div>
+      <div class="col">
+        <%= link_to "編集する", edit_admin_member_path(@member), class: "btn btn-success" %>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <%#= image_tag @member.profile_image,size: "200x200" %>
-    </div>
-    <div class="col">
-      <table class="table">
-        
-      </table>
+  <div class="container">
+    <div class="row">
+      <div class="col-2">
+        <% if @member.profile_image.attached? %>
+          <%= image_tag @member.profile_image, size: "250x250" %>
+        <% else %>
+          <%= image_tag 'no_image!!', size: "250x250" %>
+        <% end %>
+      </div>
+      <div class="col-1"></div>
+      <div class="col-5">
+        <table class="table">
+          <tr>
+            <th class="border-0 col-4">会員ID</th>
+            <td class="border-0 font-weight-bold"><%= @member.id %></td>
+          </tr>
+          <tr>
+            <th class="border-0">会員名</th>
+            <td class="border-0 font-weight-bold"><%= @member.name %>(<%= @member.name_ruby %>)</td>
+          </tr>
+          <tr>
+            <th class="border-0">ニックネーム</th>
+            <td class="border-0 font-weight-bold"><%= @member.nickname %></td>
+          </tr>
+          <tr>
+            <th class="border-0">メールアドレス</th>
+            <td class="border-0 font-weight-bold"><%= @member.email %></td>
+          </tr>
+          <tr>
+            <th class="border-0">レビュー投稿数</th>
+            <td class="border-0 font-weight-bold"><%= @member.reviews.count %></td>
+          </tr>
+          <tr>
+            <th class="border-0">会員ステータス</th>
+            <% if @member.is_deleted == false %>
+              <td class="border-0 text-primary font-weight-bold align-middle">
+                <%= @member.boolean_label(@member.is_deleted) %>
+              </td>
+            <% else %>
+              <td class="border-0 text-secondary font-weight-bold align-middle">
+                <%= @member.boolean_label(@member.is_deleted) %>
+              </td>
+            <% end %>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
 </div>

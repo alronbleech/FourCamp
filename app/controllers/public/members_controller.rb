@@ -1,5 +1,6 @@
 class Public::MembersController < ApplicationController
   before_action :authenticate_member!
+  before_action :ensure_guest_member, only: [:edit]
 
   def show
     is_matching_login_member
@@ -24,7 +25,7 @@ class Public::MembersController < ApplicationController
 
   def quit
   end
-  
+
   def out
     @member = current_member
     @member.update(is_deleted: true)
@@ -44,4 +45,12 @@ class Public::MembersController < ApplicationController
     redirect_to root_path
     end
   end
+
+  def ensure_guest_member
+    @member = Member.find(params[:id])
+    if @member.name == "guest"
+      redirect_to root_path
+    end
+  end
+
 end

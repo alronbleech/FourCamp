@@ -1,2 +1,65 @@
-<h1>Admin::Members#edit</h1>
-<p>Find me in app/views/admin/members/edit.html.erb</p>
+<div style="height: 655px;">
+  <div class="container mt-3 mb-3">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col">
+        <h1><%= @member.name %>の編集</h1>
+        <% if @member.errors.any? %>
+          <%= @member.errors.count %>件の記入ミスがあります
+          <ul>
+            <% @member.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+      <div class="col"></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <%= form_with model: @member, url: admin_member_path(@member) do |f| %>
+          <table class="table">
+            <tr>
+              <th class="border-0"><%= f.label :profile_image, 'プロフィールイメージ' %></th>
+              <td class="border-0"><%= f.file_field :profile_image, accept: "image/*" %></td>
+            </tr>
+            <tr>
+              <th class="border-0"><%= f.label :name, '名前' %></th>
+              <td class="border-0"><%= f.text_field :name, class:"form-control form-control-sm align-middle", style:"width: 200px;" %></td>
+            </tr>
+            <tr>
+              <th class="border-0"><%= f.label :name_ruby, 'フリガナ' %></th>
+              <td class="border-0"><%= f.text_field :name_ruby, class:"form-control form-control-sm align-middle", style:"width: 200px;" %></td>
+            </tr>
+            <tr>
+              <th class="border-0"><%= f.label :nickname, 'メールアドレス' %></th>
+              <td class="border-0"><%= f.text_field :address, class:"form-control form-control-sm align-middle", style:"width: 250px;" %></td>
+            </tr>
+            <tr>
+              <th class="border-0"><%= f.label :nickname, 'ニックネーム' %></th>
+              <td class="border-0"><%= f.text_field :nickname, class:"form-control form-control-sm align-middle", style:"width: 200px;" %></td>
+            </tr>
+            <tr>
+            <th class="border-0">会員ステータス</th>
+              <td class="border-0 font-weight-bold">
+                <%= f.radio_button :is_deleted, :false %>
+                <%= f.label :is_deleted, "有効", {value: :false} %>
+                <%= f.radio_button :is_deleted, :true %>
+                <%= f.label :is_deleted, "退会", {value: :true} %>
+              </td>
+            </tr>
+            <tr>
+              <td class="border-0"></td>
+              <td class="border-0">
+                <%= f.submit '変更保存', class: 'btn btn-success mr-4' %>
+              </td>
+            </tr>
+          </table>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -12,6 +12,14 @@ class Member < ApplicationRecord
   validates :name_ruby, presence: true
   validates :nickname, presence: true
 
+  def self.guest
+    find_or_create_by!(name: 'guest' ,email: 'guest@example.com') do |member|
+      member.name_ruby = "guest"
+      member.nickname = "guest"
+      member.password = SecureRandom.urlsafe_base64
+    end
+  end
+
   def active_for_authentication?
     super && (is_deleted == false)
   end

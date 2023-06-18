@@ -23,7 +23,9 @@
             <ul class="navbar-nav ml-auto">
             <% if member_signed_in? %>
             <li class="nav-item-name h3 text-light">
+              <i class="fa-solid fa-fire-burner text-danger"></i>
               ようこそ、<%= current_member.nickname %>さん！
+              <i class="fa-solid fa-fire-burner text-danger"></i>
             </li>
             <li class="nav-item">
               <%= link_to "サイト紹介", about_path, class: 'btn btn-primary' %>
@@ -48,7 +50,7 @@
               <%= link_to '会員一覧', admin_members_path, class: 'btn btn-primary' %>
             </li>
             <li class="nav-item">
-              <%= link_to 'レビュー一覧', admin_reviews_path, class: 'btn btn-primary' %>
+              <%= link_to 'レビュー一覧', admin_campsites_path, class: 'btn btn-primary' %>
             </li>
             <li class="nav-item">
               <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'btn btn-primary' %>
@@ -82,7 +84,7 @@
           <div class="col"></div>
           <div class="col-2 d-flex align-items-center" style="height:100px;">
             <% if member_signed_in? %>
-              <%= link_to "お問い合わせ", new_member_contact_path(current_member), class: 'btn btn-success' %>
+              <%= link_to "お問い合わせ", new_member_contact_path(current_member), class: 'btn btn-primary' %>
             <% end %>
           </div>
         </div>
