@@ -15,14 +15,14 @@ class Admin::MembersController < ApplicationController
 
   def update
     @member = Member.find(params[:id])
-    @member.update(contact_params)
+    @member.update(member_params)
     redirect_to admin_member_path(@member)
   end
 
   private
 
-  def contact_params
-    params.require(:member).permit(:name, :nem_ruby, :nickname, :email, :profile_image)
+  def member_params
+    params.require(:member).permit(:name, :nem_ruby, :nickname, :email, :is_deleted, :profile_image)
   end
 
 end
