@@ -2,7 +2,11 @@ class Admin::MembersController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @members = Member.all
+    if params[:is_deleted].present?
+      @members = Member.where(is_deleted: params[:is_deleted])
+    else
+      @members = Member.all
+    end
   end
 
   def show
@@ -15,14 +19,17 @@ class Admin::MembersController < ApplicationController
 
   def update
     @member = Member.find(params[:id])
-    @member.update(member_params)
-    redirect_to admin_member_path(@member)
+    if @member.update(member_params)
+      redirect_to admin_member_path(@member)
+    else
+      render :edit
+    end
   end
 
   private
 
   def member_params
-    params.require(:member).permit(:name, :nem_ruby, :nickname, :email, :is_deleted, :profile_image)
+    params.require(:member).permit(:name, :name_ruby, :nickname, :email, :is_deleted, :profile_image)
   end
 
 end

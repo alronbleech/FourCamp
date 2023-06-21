@@ -30,8 +30,8 @@
             <td class="border-0"><%= f.text_field :name, class:"form-control form-control-sm align-middle", style:"width: 400px;" %></td>
           </tr>
           <tr>
-            <th class="border-0"><%= f.label :address, 'キャンプ場住所' %></th>
-            <td class="border-0"><%= f.text_area :address, class:"form-control form-control-sm align-middle", style:"width: 400px;" %></td>
+            <th class="border-0"><%= f.label :campsite_type_id, 'キャンプ場種類' %></th>
+            <td class="border-0"><%= f.select 'campsite_type_id', options_for_select(CampsiteType.type_names.map {|key, value| [key, value]}), {}, class:"form-control form-control-sm align-middle text-center", style:"width: 70px;" %></td>
           </tr>
           <tr>
             <th class="border-0"><%= f.label :prefecture_id, '県名' %></th>
@@ -40,8 +40,8 @@
             </td>
           </tr>
           <tr>
-            <th class="border-0"><%= f.label :campsite_type_id, 'キャンプ場種類' %></th>
-            <td class="border-0"><%= f.select 'campsite_type_id', options_for_select(CampsiteType.type_names.map {|key, value| [key, value]}), {}, class:"form-control form-control-sm align-middle text-center", style:"width: 70px;" %></td>
+            <th class="border-0"><%= f.label :address, 'キャンプ場住所' %></th>
+            <td class="border-0"><%= f.text_area :address, class:"form-control form-control-sm align-middle", style:"width: 400px;" %></td>
           </tr>
           <tr>
             <th class="border-0"><%= f.label :phone_number, '電話番号' %></th>

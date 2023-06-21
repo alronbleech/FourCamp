@@ -120,7 +120,13 @@
         </thead>
         <% @campsites.each do |campsite| %>
         <tr class="text-center">
-          <td class="border-0"><%= image_tag campsite.campsite_image, size: "100x100" %></td>
+          <td class="border-0">
+            <% if campsite.campsite_image.attached? %>
+              <%= image_tag campsite.campsite_image, size: "100x100" %>
+            <% else %>
+              <%= image_tag 'no_image!!', size: "100x100" %>
+            <% end %>
+          </td>
           <td class="font-weight-bold align-middle border-0">
             <%= link_to campsite_path(campsite), class:"text-dark" do %>
               <%= campsite.name %>

@@ -26,19 +26,34 @@ class Public::ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.member_id = current_member.id
     @review.campsite_id = params[:campsite_id]
-    tag_list = params[:review][:tag_name].split(',')
-    if @review.save
+    p params[:review][:tag_name]
+    if params[:review][:tag_name] == ""
+      flash[:notice] = "季節が入力されていません。"
+      render :new
+    elsif @review.save
+      tag_list = params[:review][:tag_name].split(',')
       @review.save_tags(tag_list)
       redirect_to campsite_path(@review.campsite_id)
     else
-      redirect_to about_path
+      render :new
     end
   end
 
   def update
-    review = Review.find(params[:id])
-    review.update(review_params)
-    redirect_to campsite_review_path(review.campsite_id,review.id)
+    @review = Review.find(params[:id])
+    @review.member_id = current_member.id
+    @review.campsite_id = params[:campsite_id]
+    p params[:review][:tag_name]
+    if params[:review][:tag_name] == ""
+      flash[:notice] = "季節が入力されていません。"
+      render :edit
+    elsif @review.save
+      tag_list = params[:review][:tag_name].split(',')
+      @review.save_tags(tag_list)
+      redirect_to campsite_review_path(@review.campsite_id)
+    else
+      render :edit
+    end
   end
 
   def destroy

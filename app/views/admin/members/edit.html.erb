@@ -19,11 +19,12 @@
 
   <div class="container">
     <div class="row">
+      <div class="col-2"></div>
       <div class="col">
-        <%= form_with model: @member, url: admin_member_path(@member) do |f| %>
+        <%= form_with model:@member, url:admin_member_path(@member) do |f| %>
           <table class="table">
             <tr>
-              <th class="border-0"><%= f.label :profile_image, 'プロフィールイメージ' %></th>
+              <th class="border-0 col-2"><%= f.label :profile_image, 'プロフィール画像' %></th>
               <td class="border-0"><%= f.file_field :profile_image, accept: "image/*" %></td>
             </tr>
             <tr>
@@ -35,8 +36,8 @@
               <td class="border-0"><%= f.text_field :name_ruby, class:"form-control form-control-sm align-middle", style:"width: 200px;" %></td>
             </tr>
             <tr>
-              <th class="border-0"><%= f.label :nickname, 'メールアドレス' %></th>
-              <td class="border-0"><%= f.text_field :address, class:"form-control form-control-sm align-middle", style:"width: 250px;" %></td>
+              <th class="border-0"><%= f.label :email, 'メールアドレス' %></th>
+              <td class="border-0"><%= f.text_field :email, class:"form-control form-control-sm align-middle", style:"width: 250px;" %></td>
             </tr>
             <tr>
               <th class="border-0"><%= f.label :nickname, 'ニックネーム' %></th>

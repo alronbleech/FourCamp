@@ -12,6 +12,11 @@
             <% end %>
           </ul>
         <% end %>
+        <% if @review.review_image.attached? %>
+          <%= image_tag @review.review_image, size: "200x200" %>
+        <% else %>
+          <%= image_tag 'No_image!!_profile', size: "200x200" %>
+        <% end %>
       </div>
       <div class="col"></div>
     </div>
@@ -23,7 +28,7 @@
         <%= form_with model: @review, url: admin_campsite_review_path(@review.campsite_id), class: "form-row" do |f| %>
           <table class="table">
             <tr>
-              <th class="border-0 text-center"><%= f.label :review_image, 'レビューイメージ' %></th>
+              <th class="border-0 text-center"><%= f.label :review_image, '画像アップロード' %></th>
               <td class="border-0"><%= f.file_field :review_image, accept: "image/*" %></td>
             </tr>
             <tr>

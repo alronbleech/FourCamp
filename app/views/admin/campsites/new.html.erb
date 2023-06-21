@@ -18,12 +18,14 @@
 
 <div class="container">
   <div class="row">
+    <div class="col-1"></div>
     <div class="col">
       <%= form_with model: @campsite, url: admin_campsites_path, class: "form-row" do |f| %>
           <table class="table">
             <tr>
-              <th class="border-0"><%= f.label :campsite_image, 'キャンプ場写真' %></th>
-              <td class="border-0"><%= f.file_field :campsite_image, accept: "image/*" %></td>
+              <th class="border-0 col-2"><%= f.label :campsite_image, 'キャンプ場写真' %></th>
+              <td class="border-0 col-5"><%= f.file_field :campsite_image, accept: "image/*" %></td>
+              <td class="border-0 col-5"></td>
             </tr>
             <tr>
               <th class="border-0"><%= f.label :name, 'キャンプ場名' %></th>
@@ -61,7 +63,7 @@
             </tr>
             <tr>
               <td class="border-0"></td>
-              <td class="border-0"><%= f.submit '新規登録', class: 'btn btn-success' %></td>
+              <td class="border-0 text-center"><%= f.submit '新規登録', class: 'btn btn-lg btn-success' %></td>
             </tr>
           </table>
         <% end %>

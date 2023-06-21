@@ -10,7 +10,8 @@ class Member < ApplicationRecord
 
   validates :name, presence: true
   validates :name_ruby, presence: true
-  validates :nickname, presence: true
+  validates :nickname, presence: true, length: { maximum: 15 }
+  validates :email, presence: true, uniqueness: true
 
   def self.guest
     find_or_create_by!(name: 'guest' ,email: 'guest@example.com') do |member|

@@ -1,44 +1,45 @@
-<div class="container mt-5 mb-5">
-  <div class="row">
-    <div class="col"></div>
-    <div class="col">
-      <span class="h1">お問い合わせ詳細</span>
-    </div>
-    <div class="col"></div>
+<div style="height: 655px;">
+  <div class="container mt-5 mb-5">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col">
+        <span class="h1">お問い合わせ詳細</span>
+      </div>
+      <div class="col"></div>
     </div>
   </div>
-</div>
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="col"></div>
-    <div class="col-6">
-      <table class="table">
-        <thead>
-          <tr>
-            <th class="text-center col-3">件名</th>
-            <th class="col-6 h2"><%= @contact.subject %></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th class="text-center border-0">内容</th>
-            <td class="border-0">
-              <%= @contact.demand %>
-            </td>
-          </tr>
-          <tr>
-            <th class="border-0 text-center">対応済み/未対応</th>
-            <td class="border-0">
-              <%= form_with model: @contact, url: admin_contact_path, class: "form-row" do |f| %>
-              <%= f.select :supported_status, Contact.supported_statuses_i18n.invert, {prompt: false}, class:"form-control form-control-sm align-middle", style:"width: 100px;" %>
-              <%= f.submit "更新", class:"ml-5 btn btn-success" %>
-              <% end %>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col-6">
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="text-center col-3">件名</th>
+              <th class="col-6 h2"><%= @contact.subject %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class="text-center border-0">内容</th>
+              <td class="border-0">
+                <%= @contact.demand %>
+              </td>
+            </tr>
+            <tr>
+              <th class="border-0 text-center">対応済み/未対応</th>
+              <td class="border-0">
+                <%= form_with model: @contact, url: admin_contact_path, class: "form-row" do |f| %>
+                <%= f.select :supported_status, Contact.supported_statuses_i18n.invert, {prompt: false}, class:"form-control form-control-sm align-middle", style:"width: 100px;" %>
+                <%= f.submit "更新", class:"ml-5 btn btn-success" %>
+                <% end %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col"></div>
     </div>
-    <div class="col"></div>
   </div>
 </div>

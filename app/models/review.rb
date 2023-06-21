@@ -10,6 +10,10 @@ class Review < ApplicationRecord
 
   has_one_attached:review_image
 
+  validates :title, presence: true, length: { maximum: 30 }
+  validates :star, presence: true
+  validates :comment, presence: true, length: { maximum: 200 }
+
   def save_tags(savereview_tags)
     current_tags = self.tags.pluck(:name) unless self.tags.nil?
     old_tags = current_tags - savereview_tags

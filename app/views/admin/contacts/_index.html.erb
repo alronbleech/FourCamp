@@ -1,0 +1,21 @@
+<% contacts.each do |contact| %>
+  <tr class="text-center">
+    <td class="font-weight-bold border-0">
+      <%= contact.member.name %>
+    </td>
+    <td class="font-weight-bold border-0">
+      <%= link_to edit_admin_contact_path(contact), class:"text-dark" do %>
+        <%= contact.subject %>
+      <% end %>
+    </td>
+    <% if contact.supported_status == "unsupported" %>
+    <td class="text-secondary font-weight-bold border-0">
+      <%= Contact.supported_statuses_i18n[contact.supported_status] %>
+    </td>
+    <% elsif contact.supported_status == "fixed" %>
+    <td class="text-success font-weight-bold border-0">
+      <%= Contact.supported_statuses_i18n[contact.supported_status] %>
+    </td>
+    <% end %>
+  </tr>
+<% end %>
