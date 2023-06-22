@@ -3,9 +3,17 @@ class Admin::HomesController < ApplicationController
 
   def top
     if params[:supported_status].present?
-      @contacts = Contact.where(supported_status: params[:supported_status])
+      @contacts = Contact.where(supported_status: params[:supported_status]).page(params[:page])
+      respond_to do |format|
+        format.html
+        format.js
+      end
     else
-      @contacts = Contact.all
+      @contacts = Contact.page(params[:page])
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
   end
 

@@ -11,6 +11,7 @@ class Public::ReviewsController < ApplicationController
     @method = params[:method]
     if @model == 'tag'
       @reviews = Tag.search_reviews_for(@content, @method)
+      @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(5)
     end
   end
 
@@ -26,7 +27,6 @@ class Public::ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.member_id = current_member.id
     @review.campsite_id = params[:campsite_id]
-    p params[:review][:tag_name]
     if params[:review][:tag_name] == ""
       flash[:notice] = "季節が入力されていません。"
       render :new

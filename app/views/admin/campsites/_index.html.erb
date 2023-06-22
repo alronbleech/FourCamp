@@ -1,0 +1,18 @@
+<% campsites.each do |campsite| %>
+<tr class="text-center">
+  <td>
+    <% if campsite.campsite_image.attached? %>
+      <%= image_tag campsite.campsite_image, size: "100x100" %>
+    <% else %>
+      <%= image_tag 'no_image!!', size: "100x100" %>
+    <% end %>
+  </td>
+  <td class="font-weight-bold align-middle">
+    <%= link_to admin_campsite_path(campsite), class:"text-dark" do %>
+      <%= campsite.name %>
+    <% end %>
+  </td>
+  <td class="font-weight-bold align-middle"><%= campsite.campsite_type.type_name %></td>
+  <td class="font-weight-bold align-middle"><%= campsite.reviews.count %></td>
+</tr>
+<% end %>

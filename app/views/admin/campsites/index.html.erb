@@ -1,4 +1,4 @@
-<div style="height: 655px;">
+<div style="height: 800px;">
   <div class="container mt-3 mb-3">
     <div class="row">
       <div class="col"></div>
@@ -15,7 +15,7 @@
     <div class="row">
       <div class="col">
         <div class="text-center mb-3">
-          <%= form_with(url: admin_campsites_path, method: :get) do |f| %>
+          <%= form_with(url: admin_campsites_path, method: :get, data: {remote: true}) do |f| %>
             <span class="font-weight-bold mr-3">県名</span>
             <%= f.collection_select :prefecture_id, @prefectures, :id, :prefecture_name, { prompt: '選択' }, class: "form-control-sm", style:"width: 100px;" %>
             <span class="font-weight-bold ml-3 mr-3">キャンプ場種類</span>
@@ -39,27 +39,11 @@
               <th>レビュー数</th>
             </tr>
           </thead>
-          <tbody>
-            <% @campsites.each do |campsite| %>
-            <tr class="text-center">
-              <td>
-                <% if campsite.campsite_image.attached? %>
-                  <%= image_tag campsite.campsite_image, size: "100x100" %>
-                <% else %>
-                  <%= image_tag 'no_image!!', size: "100x100" %>
-                <% end %>
-              </td>
-              <td class="font-weight-bold align-middle">
-                <%= link_to admin_campsite_path(campsite), class:"text-dark" do %>
-                  <%= campsite.name %>
-                <% end %>
-              </td>
-              <td class="font-weight-bold align-middle"><%= campsite.campsite_type.type_name %></td>
-              <td class="font-weight-bold align-middle"><%= campsite.reviews.count %></td>
-            </tr>
-            <% end %>
+          <tbody id="campsite-list">
+            <%= render 'admin/campsites/index', campsites: @campsites %>
           </tbody>
         </table>
+        <%= paginate @campsites %>
       </div>
     </div>
   </div>

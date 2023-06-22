@@ -7,6 +7,7 @@ class Admin::ReviewsController < ApplicationController
     @method = params[:method]
     if @model == 'tag'
       @reviews = Tag.search_reviews_for(@content, @method)
+      @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(5)
     end
   end
 

@@ -1,76 +1,77 @@
-<div style="height: 655px;">
-<% if @model == 'review' || @model == 'tag' %>
-  <div class="container mt-5 mb-5">
-    <div class="row">
-      <div class="col"></div>
-      <div class="col">
-        <span class="h1">レビュー検索結果</span>
-      </div>
-      <div class="col"></div>
-    </div>
-  </div>
-
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <table class="table table-hover">
-          <thead>
-            <tr class="text-center">
-              <th class="col-1">レビュー写真</th>
-              <th class="col-1">レビュータイトル</th>
-              <th class="col-1">季節</th>
-              <th class="col-1">評価</th>
-              <th class="col-1"></th>
-            </tr>
-          </thead>
-          <% @reviews.each do |review| %>
-          <tbody>
-            <tr class="text-center">
-              <td>
-                <% if review.review_image.attached? %>
-                  <%= image_tag review.review_image, size: "100x100" %>
-                <% else %>
-                  <%= image_tag 'no_image!!', size: "100x100" %>
-                <% end %>
-              </td>
-              <td class="font-weight-bold align-middle">
-                <%= link_to campsite_review_path(review.campsite_id,review.id), class: "text-dark" do %>
-                  <%= review.title %>
-                <% end %>
-              </td>
-              <td class="font-weight-bold align-middle">
-                <% review.tags.each do |tag| %>
-                  <%= tag.name %>
-                <% end %>
-              </td>
-              <td id="star-review-<%= review.id %>" class="align-middle"></td>
-              <script>
-                $('#star-review-<%= review.id %>').empty();
-                  raty(document.getElementById('star-review-<%= review.id %>'), {
-                   starOn: '<%= asset_path('star-on.png') %>',
-                   starOff: '<%= asset_path('star-off.png') %>',
-                   scoreName: 'review[star]',
-                   score: <%= review.star %>,
-                   half: false,
-                   readOnly: true,
-                });
-              </script>
-            </tr>
-          </tbody>
-          <% end %>
-        </table>
+<div style="height: 800px;">
+  <% if @model == 'review' || @model == 'tag' %>
+    <div class="container mt-5 mb-5">
+      <div class="row">
+        <div class="col"></div>
+        <div class="col">
+          <span class="h1">レビュー検索結果</span>
+        </div>
+        <div class="col"></div>
       </div>
     </div>
-  </div>
-  <% else %>
-  <div class="container mt-5 mb-5">
-    <div class="row">
-      <div class="col"></div>
-      <div class="col">
-        <span class="h1">該当レビューはありません</span>
+  
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <table class="table table-hover">
+            <thead>
+              <tr class="text-center">
+                <th class="col-1">レビュー写真</th>
+                <th class="col-1">レビュータイトル</th>
+                <th class="col-1">季節</th>
+                <th class="col-1">評価</th>
+                <th class="col-1"></th>
+              </tr>
+            </thead>
+            <% @reviews.each do |review| %>
+            <tbody>
+              <tr class="text-center">
+                <td>
+                  <% if review.review_image.attached? %>
+                    <%= image_tag review.review_image, size: "100x100" %>
+                  <% else %>
+                    <%= image_tag 'no_image!!', size: "100x100" %>
+                  <% end %>
+                </td>
+                <td class="font-weight-bold align-middle">
+                  <%= link_to campsite_review_path(review.campsite_id,review.id), class: "text-dark" do %>
+                    <%= review.title %>
+                  <% end %>
+                </td>
+                <td class="font-weight-bold align-middle">
+                  <% review.tags.each do |tag| %>
+                    <%= tag.name %>
+                  <% end %>
+                </td>
+                <td id="star-review-<%= review.id %>" class="align-middle"></td>
+                <script>
+                  $('#star-review-<%= review.id %>').empty();
+                    raty(document.getElementById('star-review-<%= review.id %>'), {
+                     starOn: '<%= asset_path('star-on.png') %>',
+                     starOff: '<%= asset_path('star-off.png') %>',
+                     scoreName: 'review[star]',
+                     score: <%= review.star %>,
+                     half: false,
+                     readOnly: true,
+                  });
+                </script>
+              </tr>
+            </tbody>
+            <% end %>
+          </table>
+          <%= paginate @reviews %>
+        </div>
       </div>
-      <div class="col"></div>
     </div>
-  </div>
-<% end %>
+    <% else %>
+    <div class="container mt-5 mb-5">
+      <div class="row">
+        <div class="col"></div>
+        <div class="col">
+          <span class="h1">該当レビューはありません</span>
+        </div>
+        <div class="col"></div>
+      </div>
+    </div>
+  <% end %>
 </div>

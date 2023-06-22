@@ -3,9 +3,17 @@ class Admin::MembersController < ApplicationController
 
   def index
     if params[:is_deleted].present?
-      @members = Member.where(is_deleted: params[:is_deleted])
+      @members = Member.where(is_deleted: params[:is_deleted]).page(params[:page])
+      respond_to do |format|
+        format.html
+        format.js
+      end
     else
-      @members = Member.all
+      @members = Member.page(params[:page])
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
   end
 

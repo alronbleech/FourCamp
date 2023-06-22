@@ -1,4 +1,11 @@
 ja:
+  views:
+    pagination:
+      first: <i class="fas fa-angle-double-left"></i>
+      last: <i class="fas fa-angle-double-right"></i>
+      previous: <i class="fas fa-angle-left"></i>
+      next: <i class="fas fa-angle-right"></i>
+      truncate: "..."
   enums:
     contact:
       supported_status:
@@ -25,6 +32,9 @@ ja:
         title: "レビュータイトル"
         star: "☆評価"
         comment: "コメント"
+      contact:
+        subject: "件名"
+        demand: "お問い合わせ内容"
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
         restrict_dependent_destroy:

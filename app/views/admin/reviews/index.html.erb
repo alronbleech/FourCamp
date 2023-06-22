@@ -1,4 +1,4 @@
-<div style="height: 655px;">
+<div style="height: 800px;">
   <% if @model == 'review' || @model == 'tag' %>
     <div class="container mt-5 mb-5">
       <div class="row">
@@ -58,6 +58,7 @@
             </tbody>
             <% end %>
           </table>
+          <%= paginate @reviews %>
         </div>
       </div>
     </div>

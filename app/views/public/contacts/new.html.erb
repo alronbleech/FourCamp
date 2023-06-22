@@ -1,29 +1,45 @@
-<div class="container mt-3 mb-3">
-  <div class="row">
-    <div class="col">
-      <h1>お問い合わせ</h1>
+<div style="height: 655px;">
+  <div class="container mt-3 mb-3">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col">
+        <h1>お問い合わせ</h1>
+        <% if @contact.errors.any? %>
+          <%= @contact.errors.count %>件の記入ミスがあります
+          <ul>
+            <% @contact.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+      <div class="col"></div>
     </div>
   </div>
-</div>
 
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <%= form_with model: @contact, url: member_contacts_path do |f| %>
-          <table class="table">
-            <tr>
-              <th><%= f.label :subject, '件名' %></th>
-              <td><%= f.text_field :subject, class:"form-control form-control-sm align-middle", style:"width: 200px;" %></td>
-            </tr>
-            <tr>
-              <th><%= f.label :demand, 'お問い合わせ内容' %></th>
-              <td><%= f.text_area :demand, class:"form-control form-control-sm align-middle", style:"width: 400px; height: 200px;" %></td>
-            </tr>
-          </table>
-          <div class="text-center col">
-            <%= f.submit '送信', class: 'btn btn-success', "data-confirm" => "内容を再度ご確認ください。送信しますか？" %>
-          </div>
-        <% end %>
+  <div class="container">
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col">
+        <%= form_with model: @contact, url: member_contacts_path do |f| %>
+            <table class="table">
+              <tr>
+                <th class="border-0 text-center col-2"><%= f.label :subject, '件名' %></th>
+                <td class="border-0"><%= f.text_field :subject, class:"form-control form-control-sm align-middle", style:"width: 200px;" %></td>
+              </tr>
+              <tr>
+                <th class="border-0 text-center"><%= f.label :demand, 'お問い合わせ内容' %></th>
+                <td class="border-0"><%= f.text_area :demand, class:"form-control form-control-sm align-middle", style:"width: 400px; height: 200px;" %></td>
+              </tr>
+              <tr>
+                <th class="border-0"></th>
+                <td class="border-0">
+                  <%= f.submit '送信', class: 'ml-5 btn btn-success', "data-confirm" => "内容を再度ご確認ください。送信しますか？" %>
+                </td>
+              </tr>
+            </table>
+          <% end %>
+      </div>
     </div>
   </div>
 </div>

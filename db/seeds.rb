@@ -62,3 +62,29 @@ CampsiteType.create(type_name: "河原")
 CampsiteType.create(type_name: "林間")
 CampsiteType.create(type_name: "湖畔")
 
+15.times do |n|
+  Member.create(email: "test{n}camp@camp", name: "試作{n}号", name_ruby: "しさく{n}ごう", nickname: "テスト{n}",password: "test{n}camp", password_confirmation: "test{n}camp")
+end
+
+target_prefecture = Prefecture.find_by(name: "熊本県") #県名の中から熊本県を取得
+
+10.times do |value , index|
+  campsite = Campsite.new
+  campsite.prefecture = target_prefecture
+  name + index.to_s
+
+  campsite.save
+end
+
+member= Member.create(...)
+ #ここからレビュー作成時のseed
+review = Review.new(title: "test1", :star, :comment, :review_image)
+review.member_id = member.id
+review.campsite_id = campsite.id
+
+
+tag_list = "aki," #
+review.save_tags(tag_list)
+
+review.save
+ #ここまでレビュー作成時のseed
