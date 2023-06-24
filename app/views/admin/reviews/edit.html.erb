@@ -12,11 +12,6 @@
             <% end %>
           </ul>
         <% end %>
-        <% if @review.review_image.attached? %>
-          <%= image_tag @review.review_image, size: "200x200" %>
-        <% else %>
-          <%= image_tag 'No_image!!_profile', size: "200x200" %>
-        <% end %>
       </div>
       <div class="col"></div>
     </div>
