@@ -36,7 +36,7 @@ class Public::MembersController < ApplicationController
 
   private
   def member_params
-    params.require(:member).permit(:email,:name,:name_ruby,:nickname,:is_deleted)
+    params.require(:member).permit(:email,:name,:name_ruby,:nickname,:is_deleted,:profile_image)
   end
 
   def is_matching_login_member
