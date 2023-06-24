@@ -4,11 +4,6 @@
       <div class="col"></div>
       <div class="col">
         <h1>レビュー新規作成</h1>
-        <% if flash[:notice] %>
-          <ul>
-            <li><%= flash[:notice] %></li>
-          </ul>
-        <% end %>
         <% if @review.errors.any? %>
           <%= @review.errors.count %>件の記入ミスがあります
           <ul>
@@ -16,6 +11,11 @@
               <li><%= message %></li>
             <% end %>
           </ul>
+        <% end %>
+        <% if flash[:notice] == "季節が入力されていません。" %>
+        <ul>
+          <li><%= flash[:notice] %></li>
+        </ul>
         <% end %>
       </div>
       <div class="col"></div>

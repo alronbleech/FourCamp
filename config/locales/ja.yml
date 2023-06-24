@@ -12,6 +12,8 @@ ja:
         unsupported: "未対応"
         fixed: "対応済み"
   activerecord:
+    models:
+      member: "会員情報"
     attributes:
       member:
         name: "名前"

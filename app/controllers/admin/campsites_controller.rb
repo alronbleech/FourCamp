@@ -15,10 +15,6 @@ class Admin::CampsitesController < ApplicationController
       end
     else
       @campsites = Campsite.page(params[:page]).per(5)
-      respond_to do |format|
-        format.html
-        format.js
-      end
     end
   end
 
@@ -40,9 +36,12 @@ class Admin::CampsitesController < ApplicationController
   end
 
   def update
-    campsite = Campsite.find(params[:id])
-    campsite.update(campsite_params)
-    redirect_to admin_campsite_path(campsite)
+    @campsite = Campsite.find(params[:id])
+    if @campsite.update(campsite_params)
+      redirect_to admin_campsite_path(@campsite)
+    else
+      render :edit
+    end
   end
 
   def destroy

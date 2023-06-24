@@ -88,3 +88,4 @@ review.save_tags(tag_list)
 
 review.save
  #ここまでレビュー作成時のseed
+contact
