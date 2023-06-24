@@ -63,29 +63,82 @@ CampsiteType.create(type_name: "林間")
 CampsiteType.create(type_name: "湖畔")
 
 15.times do |n|
-  Member.create(email: "test{n}camp@camp", name: "試作{n}号", name_ruby: "しさく{n}ごう", nickname: "テスト{n}",password: "test{n}camp", password_confirmation: "test{n}camp")
+  Member.create!(
+  email: "test#{n + 1}camp@camp",
+  name: "試作#{n + 1}号",
+  name_ruby: "しさく#{n + 1}ごう",
+  nickname: "テスト#{n + 1}",
+  password: "test#{n + 1}camp",
+  password_confirmation: "test#{n + 1}camp")
 end
 
-target_prefecture = Prefecture.find_by(name: "熊本県") #県名の中から熊本県を取得
+Member.create(
+  email: "test16camp@camp",
+  name: "試作16号",
+  name_ruby: "しさく16ごう",
+  nickname: "テスト16",
+  password: "test16camp",
+  password_confirmation: "test16camp",
+  profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-member1.jpg"),filename: "sample-member1.jpg")
+  )
 
-10.times do |value , index|
-  campsite = Campsite.new
-  campsite.prefecture = target_prefecture
-  name + index.to_s
-
-  campsite.save
+10.times do |n|
+  Campsite.create(
+    campsite_type_id: 4,
+    prefecture_id: 1,
+    name: "campsite in テスト#{n + 1}",
+    address: "テスト市テスト区試作#{n + 1}丁目",
+    phone_number: "6540000111#{n + 1}",
+    route: "テスト駅からテスト町行バスへ乗り徒歩#{n + 1}分",
+    feature: "各季節で限定のイベントを行っています！去年の夏はバーベキューで大いに盛り上がりました！！",
+    considerations: "毎年夏から秋にかけてクマの目撃情報が寄せられています。クマよけの鈴を配布していますので、お持ちでない方はカウンターまでお越しください。",
+    )
 end
 
-member= Member.create(...)
- #ここからレビュー作成時のseed
-review = Review.new(title: "test1", :star, :comment, :review_image)
-review.member_id = member.id
-review.campsite_id = campsite.id
+Campsite.create(
+    campsite_type_id: 3,
+    prefecture_id: 2,
+    name: "campsite in テスト11",
+    address: "テスト市テスト区試作11丁目11-11",
+    phone_number: "654000011111",
+    route: "テスト駅からテスト町行バスへ乗り徒歩11分",
+    feature: "各季節で限定のイベントを行っています！去年の夏はバーベキューで大いに盛り上がりました！！",
+    considerations: "毎年夏から秋にかけてクマの目撃情報が寄せられています。クマよけの鈴を配布していますので、お持ちでない方はカウンターまでお越しください。",
+    campsite_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-campsite1.jpg"),filename: "sample-campsite1.jpg")
+  )
+
+10.times do |n|
+  review = Review.new(
+    member_id: 1,
+    campsite_id: 1,
+    title: "テストレビュー#{n + 1}",
+    star: 4.0,
+    comment: "気温が高かったが、風があったので快適に過ごせましたが、強風対策は必須です。"
+    )
+  tag_list = ["春"]
+  review.save_tags(tag_list)
+  review.save
+end
+
+1.times do |n|
+  review = Review.new(
+    member_id: 1,
+    campsite_id: 1,
+    title: "テストレビュー11",
+    star: 4.0,
+    comment: "気温が高かったが、風があったので快適に過ごせましたが、強風対策は必須です。",
+    review_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-review1.jpg"),filename: "sample-review1.jpg")
+    )
+  tag_list = ["春"]
+  review.save_tags(tag_list)
+  review.save
+end
 
 
-tag_list = "aki," #
-review.save_tags(tag_list)
-
-review.save
- #ここまでレビュー作成時のseed
-contact
+15.times do |n|
+  Contact.create(
+    member_id: 2,
+    subject: "テストお問い合わせ#{n + 1}",
+    demand: "テストお問い合わせ#{n + 1}テストお問い合わせ#{n + 1}テストお問い合わせ#{n + 1}テストお問い合わせ#{n + 1}"
+    )
+end

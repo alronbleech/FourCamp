@@ -6,7 +6,9 @@
         <h1><%= @member.name %></h1>
       </div>
       <div class="col">
-        <%= link_to "編集する", edit_member_path(current_member), class: "btn btn-success" %>
+        <% if @member.id == current_member.id %>
+          <%= link_to "編集する", edit_member_path(current_member), class: "btn btn-success" %>
+        <% end %>
       </div>
     </div>
   </div>

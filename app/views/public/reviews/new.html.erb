@@ -58,7 +58,9 @@
               </tr>
               <tr>
                 <th class="border-0 text-center"><%= f.label :comment, 'コメント' %></th>
-                <td class="border-0"><%= f.text_area :comment, class:"form-control form-control-sm align-middle", style:"width: 400px; height: 150px;" %></td>
+                <td class="border-0"><%= f.text_area :comment, class:"form-control form-control-sm align-middle", style:"width: 400px; height: 150px;" %><br>
+                <p id="comment-count" class="ml-0 mt-1 text-right text-muted">0 / 200文字</p>
+                </td>
               </tr>
               <tr>
                 <th class="border-0"></th>
@@ -70,3 +72,16 @@
     </div>
   </div>
 </div>
+
+<%#文字数カウンター%>
+<script>
+  $(document).ready(function() {
+    const textField = $("#review_comment");
+    const commentCount = $("#comment-count");
+
+    textField.on("input", function() {
+      const count = textField.val().length;
+      commentCount.text(count + " / 200文字");
+    });
+  });
+</script>

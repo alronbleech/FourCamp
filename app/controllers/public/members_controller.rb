@@ -17,7 +17,7 @@ class Public::MembersController < ApplicationController
     is_matching_login_member
     @member = Member.find(params[:id])
     if @member.update(member_params)
-      redirect_to member_path(current_member)
+      redirect_to member_path(@member)
     else
       render :edit
     end
