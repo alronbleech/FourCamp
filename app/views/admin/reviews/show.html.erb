@@ -18,7 +18,7 @@
         <% if @review.review_image.attached? %>
           <%= image_tag @review.review_image, size: "200x200" %>
         <% else %>
-          <%= image_tag 'No_image!!_profile', size: "200x200" %>
+          <%= image_tag asset_path('no_image2.jpg'), size: "200x200" %>
         <% end %>
       </div>
       <div class="col-1"></div>

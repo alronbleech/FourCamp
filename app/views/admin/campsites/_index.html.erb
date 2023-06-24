@@ -4,7 +4,7 @@
     <% if campsite.campsite_image.attached? %>
       <%= image_tag campsite.campsite_image, size: "100x100" %>
     <% else %>
-      <%= image_tag 'no_image!!', size: "100x100" %>
+      <%= image_tag asset_path('no_image1.jpg'), size: "100x100" %>
     <% end %>
   </td>
   <td class="font-weight-bold align-middle">
