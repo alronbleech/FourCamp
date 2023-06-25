@@ -1,26 +1,33 @@
-<thead>
-  <tr class="text-center">
-    <th>キャンプ場写真</th>
-    <th>キャンプ場名</th>
-    <th>キャンプ場種類</th>
-    <th>レビュー数</th>
-  </tr>
-</thead>
-<% campsites.each do |campsite| %>
-  <tr class="text-center">
-    <td class="border-0">
-      <% if campsite.campsite_image.attached? %>
-        <%= image_tag campsite.campsite_image, size: "100x100" %>
-      <% else %>
-        <%= image_tag asset_path('no_image1.jpg'), size: "100x100" %>
+<div class="row">
+  <div class="col">
+    <table class="table">
+      <thead>
+        <tr class="text-center">
+          <th>キャンプ場写真</th>
+          <th>キャンプ場名</th>
+          <th>キャンプ場種類</th>
+          <th>レビュー数</th>
+        </tr>
+      </thead>
+      <% campsites.each do |campsite| %>
+        <tr class="text-center">
+          <td class="border-0">
+            <% if campsite.campsite_image.attached? %>
+              <%= image_tag campsite.campsite_image, class: "image-fit-" %>
+            <% else %>
+              <%= image_tag asset_path('no_image1.jpg'), size: "100x100" %>
+            <% end %>
+          </td>
+          <td class="font-weight-bold align-middle border-0">
+            <%= link_to campsite_path(campsite), class:"text-dark" do %>
+              <%= campsite.name %>
+            <% end %>
+          </td>
+          <td class="font-weight-bold align-middle border-0"><%= campsite.campsite_type.type_name %></td>
+          <td class="font-weight-bold align-middle border-0"><%= campsite.reviews.count %></td>
+        </tr>
       <% end %>
-    </td>
-    <td class="font-weight-bold align-middle border-0">
-      <%= link_to campsite_path(campsite), class:"text-dark" do %>
-        <%= campsite.name %>
-      <% end %>
-    </td>
-    <td class="font-weight-bold align-middle border-0"><%= campsite.campsite_type.type_name %></td>
-    <td class="font-weight-bold align-middle border-0"><%= campsite.reviews.count %></td>
-  </tr>
-<% end %>
+    </table>
+    <%= paginate campsites %>
+  </div>
+</div>

@@ -27,24 +27,7 @@
     </div>
   </div>
 
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <table class="table table-hover">
-          <thead>
-            <tr class="text-center">
-              <th>キャンプ場写真</th>
-              <th>キャンプ場名</th>
-              <th>キャンプ場種類</th>
-              <th>レビュー数</th>
-            </tr>
-          </thead>
-          <tbody id="campsite-list">
-            <%= render 'admin/campsites/index', campsites: @campsites %>
-          </tbody>
-        </table>
-        <%= paginate @campsites %>
-      </div>
-    </div>
+  <div class="container" id="campsite-list">
+    <%= render 'admin/campsites/index', campsites: @campsites %>
   </div>
 </div>

@@ -30,7 +30,7 @@
         また、山間部なので天候の変化にも注意が必要です。
       </p>
     </div>
-    <div class="col-2 text-center rounded-lg rounded mr-2" style="background: linear-gradient(#D9E5FF, #4689FF);">
+    <div class="col-2 text-center rounded-lg rounded mr-2" style="background: linear-gradient(#BAD3FF, #F8F8FF);">
       <h4 class="font-weight-bold mt-3">海辺キャンプ場</h4>
       <h6 class="font-weight-bold">特徴</h6>
       <p>
@@ -44,7 +44,7 @@
         帰宅後はしっかりと拭き上げて、メンテナンスしましょう。
       </p>
     </div>
-    <div class="col-2 text-center rounded-lg rounded mr-2" style="background: linear-gradient(#D9E5FF, #00ECFF);">
+    <div class="col-2 text-center rounded-lg rounded mr-2" style="background: linear-gradient(#A7F1FF, #E0FFFF);">
       <h4 class="font-weight-bold mt-3">河原キャンプ場</h4>
       <h6 class="font-weight-bold">特徴</h6>
       <p>
@@ -58,7 +58,7 @@
         また、虫も多い傾向にあります。特にアブやブヨなどは水辺に多くいるので、虫対策は万全にしましょう。
       </p>
     </div>
-    <div class="col-2 text-center rounded-lg rounded mr-2" style="background: linear-gradient(#CBFFD3, #2E8B57);">
+    <div class="col-2 text-center rounded-lg rounded mr-2" style="background: linear-gradient(#AEFFBD, #F0FFF0);">
       <h4 class="font-weight-bold mt-3">林間キャンプ場</h4>
       <h6 class="font-weight-bold">特徴</h6>
       <p>
@@ -106,13 +106,6 @@
   </div>
 </div>
 
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <table class="table" id="campsite-list">
-        <%= render 'public/campsites/index', campsites: @campsites %>
-      </table>
-      <%= paginate @campsites %>
-    </div>
-  </div>
+<div class="container" id="campsite-list">
+  <%= render 'public/campsites/index', campsites: @campsites %>
 </div>

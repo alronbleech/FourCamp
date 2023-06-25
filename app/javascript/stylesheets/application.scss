@@ -51,3 +51,15 @@ height: 100px;
 .pagination {
   justify-content: center;
 }
+
+.image-fit {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.image-fit-sm {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}

@@ -33,7 +33,10 @@
             </tr>
             <tr>
               <th class="border-0 text-center"><%= f.label :title, 'レビュータイトル' %></th>
-              <td class="border-0"><%= f.text_field :title, class:"form-control form-control-sm align-middle", style:"width: 400px;" %></td>
+              <td class="border-0">
+                <%= f.text_field :title, class:"form-control form-control-sm align-middle", style:"width: 400px;" %>
+                <span id="title-count" class="text-right text-top">0 / 30文字</span>
+              </td>
             </tr>
             <tr>
               <th class="border-0 text-center"><%= f.label :tag_name, "季節" %></th>
@@ -57,7 +60,10 @@
             </tr>
             <tr>
               <th class="border-0 text-center"><%= f.label :comment, 'コメント' %></th>
-              <td class="border-0"><%= f.text_area :comment, class:"form-control form-control-sm align-middle", style:"width: 400px; height: 150px;" %></td>
+              <td class="border-0">
+                <%= f.text_area :comment, class:"form-control form-control-sm align-middle", style:"width: 400px; height: 150px;" %>
+                <span id="comment-count" class="text-right text-muted">0 / 200文字</span>
+              </td>
             </tr>
             <tr>
               <td class="border-0"></td>
@@ -72,3 +78,23 @@
     </div>
   </div>
 </div>
+
+<%#文字数カウンター%>
+<script>
+  $(document).ready(function() {
+    const textField = $("#review_title");
+    const textArea = $("#review_comment");
+    const titleCount = $("#title-count")
+    const commentCount = $("#comment-count");
+
+    textField.on("input", function() {
+      const count = textField.val().length;
+      titleCount.text(count + " / 30文字");
+    });
+
+    textArea.on("input", function() {
+      const count = textArea.val().length;
+      commentCount.text(count + " / 200文字");
+    });
+  });
+</script>

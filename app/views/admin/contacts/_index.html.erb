@@ -1,28 +1,37 @@
-<thead>
-  <tr class="text-center">
-    <th class="col-1">会員名</th>
-    <th class="col-2">件名</th>
-    <th class="col-1">ステータス</th>
-  </tr>
-</thead>
-<% contacts.each do |contact| %>
-  <tr class="text-center">
-    <td class="font-weight-bold border-0">
-      <%= contact.member.name %>
-    </td>
-    <td class="font-weight-bold border-0">
-      <%= link_to edit_admin_contact_path(contact), class:"text-dark" do %>
-        <%= contact.subject %>
+<div class="row">
+  <div class="col">
+    <table class="table table-hover">
+      <thead>
+        <tr class="text-center">
+          <th class="col-1">会員名</th>
+          <th class="col-2">件名</th>
+          <th class="col-1">ステータス</th>
+        </tr>
+      </thead>
+      <% contacts.each do |contact| %>
+        <tr class="text-center">
+          <td class="font-weight-bold border-0">
+            <%= contact.member.name %>
+          </td>
+          <td class="font-weight-bold border-0">
+            <%= link_to edit_admin_contact_path(contact), class:"text-dark" do %>
+              <%= contact.subject %>
+            <% end %>
+          </td>
+          <% if contact.supported_status == "unsupported" %>
+          <td class="text-secondary font-weight-bold border-0">
+            <%= Contact.supported_statuses_i18n[contact.supported_status] %>
+          </td>
+          <% elsif contact.supported_status == "fixed" %>
+          <td class="text-success font-weight-bold border-0">
+            <%= Contact.supported_statuses_i18n[contact.supported_status] %>
+          </td>
+          <% end %>
+        </tr>
       <% end %>
-    </td>
-    <% if contact.supported_status == "unsupported" %>
-    <td class="text-secondary font-weight-bold border-0">
-      <%= Contact.supported_statuses_i18n[contact.supported_status] %>
-    </td>
-    <% elsif contact.supported_status == "fixed" %>
-    <td class="text-success font-weight-bold border-0">
-      <%= Contact.supported_statuses_i18n[contact.supported_status] %>
-    </td>
-    <% end %>
-  </tr>
-<% end %>
+    </table>
+    <div class="text-center">
+      <%= paginate contacts %>
+    </div>
+  </div>
+</div>

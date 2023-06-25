@@ -40,7 +40,10 @@
             </tr>
             <tr>
               <th class="border-0"><%= f.label :nickname, 'ニックネーム' %></th>
-              <td class="border-0"><%= f.text_field :nickname, class:"form-control form-control-sm align-middle", style:"width: 200px;" %></td>
+              <td class="border-0">
+                <%= f.text_field :nickname, class:"form-control form-control-sm align-middle", style:"width: 200px;" %>
+                <span id="nickname-count" class="ml-0 text-right text-muted">0 / 15文字</span>
+              </td>
             </tr>
             <tr>
               <td class="border-0"></td>
@@ -55,3 +58,16 @@
     </div>
   </div>
 </div>
+
+<%#文字数カウンター%>
+<script>
+  $(document).ready(function() {
+    const textField = $("#member_nickname");
+    const nicknameCount = $("#nickname-count")
+
+    textField.on("input", function() {
+      const count = textField.val().length;
+      nicknameCount.text(count + " / 15文字");
+    });
+  });
+</script>

@@ -25,11 +25,17 @@
             <table class="table">
               <tr>
                 <th class="border-0 text-center col-2"><%= f.label :subject, '件名' %></th>
-                <td class="border-0"><%= f.text_field :subject, class:"form-control form-control-sm align-middle", style:"width: 200px;" %></td>
+                <td class="border-0">
+                  <%= f.text_field :subject, class:"form-control form-control-sm align-middle", style:"width: 200px;" %>
+                  <span id="subject-count" class="text-right text-top">0 / 30文字</span>
+                </td>
               </tr>
               <tr>
                 <th class="border-0 text-center"><%= f.label :demand, 'お問い合わせ内容' %></th>
-                <td class="border-0"><%= f.text_area :demand, class:"form-control form-control-sm align-middle", style:"width: 400px; height: 200px;" %></td>
+                <td class="border-0">
+                  <%= f.text_area :demand, class:"form-control form-control-sm align-middle", style:"width: 400px; height: 200px;" %>
+                  <span id="demand-count" class="text-right text-top">0 / 200文字</span>
+                </td>
               </tr>
               <tr>
                 <th class="border-0"></th>
@@ -43,3 +49,23 @@
     </div>
   </div>
 </div>
+
+<%#文字数カウンター%>
+<script>
+  $(document).ready(function() {
+    const textField = $("#contact_subject");
+    const textArea = $("#contact_demand");
+    const subjectCount = $("#subject-count")
+    const demandCount = $("#demand-count");
+
+    textField.on("input", function() {
+      const count = textField.val().length;
+      subjectCount.text(count + " / 30文字");
+    });
+
+    textArea.on("input", function() {
+      const count = textArea.val().length;
+      demandCount.text(count + " / 200文字");
+    });
+  });
+</script>

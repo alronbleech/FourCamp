@@ -84,7 +84,7 @@ Member.create(
 
 10.times do |n|
   Campsite.create(
-    campsite_type_id: 4,
+    campsite_type_id: 1,
     prefecture_id: 1,
     name: "campsite in テスト#{n + 1}",
     address: "テスト市テスト区試作#{n + 1}丁目",
@@ -96,7 +96,7 @@ Member.create(
 end
 
 Campsite.create(
-    campsite_type_id: 3,
+    campsite_type_id: 2,
     prefecture_id: 2,
     name: "campsite in テスト11",
     address: "テスト市テスト区試作11丁目11-11",

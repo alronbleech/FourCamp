@@ -38,7 +38,7 @@
               <tr class="text-center">
                 <td>
                   <% if review.review_image.attached? %>
-                    <%= image_tag review.review_image, size: "100x100" %>
+                    <%= image_tag review.review_image, class: "image-fit-sm" %>
                   <% else %>
                     <%= image_tag asset_path('no_image1.jpg'), size: "100x100" %>
                   <% end %>
