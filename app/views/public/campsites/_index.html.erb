@@ -13,7 +13,7 @@
         <tr class="text-center">
           <td class="border-0">
             <% if campsite.campsite_image.attached? %>
-              <%= image_tag campsite.campsite_image, class: "image-fit-" %>
+              <%= image_tag campsite.campsite_image, size: "100x100", class: "image-fit-sm" %>
             <% else %>
               <%= image_tag asset_path('no_image1.jpg'), size: "100x100" %>
             <% end %>
