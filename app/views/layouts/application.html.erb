@@ -78,7 +78,9 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-2"></div>
-          <div class="col"></div>
+          <div class="col d-flex text-center align-items-center align-middle">
+            <h6 class="text-center text-white m-auto">© 2023 fourcamp inc</h6>
+          </div>
           <div class="col-2 d-flex align-items-center" style="height:100px;">
             <% if member_signed_in? %>
               <%= link_to "お問い合わせ", new_member_contact_path(current_member), class: 'btn btn-primary' %>

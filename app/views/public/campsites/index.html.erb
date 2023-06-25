@@ -1,21 +1,21 @@
 <div class="container mt-4 mb-4">
   <div class="row">
-    <div class="col"></div>
-    <div class="col-5">
+    <div class="col-md-3"></div>
+    <div class="col-md-5">
       <h2>
         <i class="fa-solid fa-tents text-success"></i>
         <strong>キャンプサイトの種類</strong>
         <i class="fa-solid fa-tents text-success"></i>
       </h2>
     </div>
-    <div class="col"></div>
+    <div class="col-md-3"></div>
   </div>
 </div>
 
 <div class="container-fluid mt-3 mb-3">
   <div class="row">
-    <div class="col-1"></div>
-    <div class="col-2 text-center rounded-lg rounded mr-2" style="background: linear-gradient(#EEE8AA, #FFFAF0);">
+    <div class="col-md-1"></div>
+    <div class="col-md-2 text-center rounded-lg rounded mr-2" style="background: linear-gradient(#EEE8AA, #FFFAF0);">
       <h4 class="font-weight-bold mt-3">高原キャンプ場</h4>
       <h6 class="font-weight-bold">特徴</h6>
       <p>平地よりも高い山間部に作られたキャンプサイトです。<br>
@@ -30,7 +30,7 @@
         また、山間部なので天候の変化にも注意が必要です。
       </p>
     </div>
-    <div class="col-2 text-center rounded-lg rounded mr-2" style="background: linear-gradient(#BAD3FF, #F8F8FF);">
+    <div class="col-md-2 text-center rounded-lg rounded mr-2" style="background: linear-gradient(#BAD3FF, #F8F8FF);">
       <h4 class="font-weight-bold mt-3">海辺キャンプ場</h4>
       <h6 class="font-weight-bold">特徴</h6>
       <p>
@@ -44,7 +44,7 @@
         帰宅後はしっかりと拭き上げて、メンテナンスしましょう。
       </p>
     </div>
-    <div class="col-2 text-center rounded-lg rounded mr-2" style="background: linear-gradient(#A7F1FF, #E0FFFF);">
+    <div class="col-md-2 text-center rounded-lg rounded mr-2" style="background: linear-gradient(#A7F1FF, #E0FFFF);">
       <h4 class="font-weight-bold mt-3">河原キャンプ場</h4>
       <h6 class="font-weight-bold">特徴</h6>
       <p>
@@ -58,7 +58,7 @@
         また、虫も多い傾向にあります。特にアブやブヨなどは水辺に多くいるので、虫対策は万全にしましょう。
       </p>
     </div>
-    <div class="col-2 text-center rounded-lg rounded mr-2" style="background: linear-gradient(#AEFFBD, #F0FFF0);">
+    <div class="col-md-2 text-center rounded-lg rounded mr-2" style="background: linear-gradient(#AEFFBD, #F0FFF0);">
       <h4 class="font-weight-bold mt-3">林間キャンプ場</h4>
       <h6 class="font-weight-bold">特徴</h6>
       <p>
@@ -72,7 +72,7 @@
         なお、地面が乾燥している場合は、枯れ木や枯れ葉など燃えやすいものが多いですので、焚き火をする場合には十分に気をつけましょう。
       </p>
     </div>
-    <div class="col-2 text-center rounded-lg rounded mr-2" style="background: linear-gradient(#D9E5FF, #F0FFFF);">
+    <div class="col-md-2 text-center rounded-lg rounded mr-2" style="background: linear-gradient(#D9E5FF, #F0FFFF);">
       <h4 class="font-weight-bold mt-3">湖畔キャンプ場</h4>
       <h6 class="font-weight-bold">特徴</h6>
       <p>
@@ -92,8 +92,8 @@
 
 <div class="container mb-3">
   <div class="row">
-    <div class="col"></div>
-    <div class="col-5">
+    <div class="col-md"></div>
+    <div class="col-md-5">
       <%= form_with(url: campsites_path, method: :get, data: {remote: true}) do |f| %>
         <span class="font-weight-bold h4">県名</span>
         <%= f.collection_select :prefecture_id, @prefectures, :id, :prefecture_name, { prompt: '選択' }, class: "form-control-sm", style:"width: 100px;" %>
@@ -102,7 +102,7 @@
         <%= f.submit '表示', class: "btn btn-primary" %>
       <% end %>
     </div>
-    <div class="col"></div>
+    <div class="col-md"></div>
   </div>
 </div>
 
