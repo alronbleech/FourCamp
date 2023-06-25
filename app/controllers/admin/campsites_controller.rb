@@ -19,11 +19,19 @@ class Admin::CampsitesController < ApplicationController
   end
 
   def show
-    @campsite = Campsite.find(params[:id])
+    @campsite = Campsite.find_by(id: params[:id])
+    if @campsite.present?
+    else
+      redirect_to admin_path
+    end
   end
 
   def edit
-    @campsite = Campsite.find(params[:id])
+    @campsite = Campsite.find_by(id: params[:id])
+    if @campsite.present?
+    else
+      redirect_to admin_path
+    end
   end
 
   def create

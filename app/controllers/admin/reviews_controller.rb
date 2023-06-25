@@ -12,11 +12,19 @@ class Admin::ReviewsController < ApplicationController
   end
 
   def show
-    @review = Review.find(params[:id])
+    @review = Review.find_by(id: params[:id])
+    if @review.present?
+    else
+      redirect_to admin_path
+    end
   end
 
   def edit
-    @review = Review.find(params[:id])
+    @review = Review.find_by(id: params[:id])
+    if @review.present?
+    else
+      redirect_to admin_path
+    end
   end
 
   def update

@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Admin.create(email: "admin@co.jp", password: "fourcamp", password_confirmation: "fourcamp")
+Admin.create(email: "admin@camp.jp", password: "fourcamp", password_confirmation: "fourcamp")
 
 Prefecture.create(prefecture_name: "北海道")
 Prefecture.create(prefecture_name: "青森県")
