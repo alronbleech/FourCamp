@@ -20,9 +20,12 @@ class Admin::ReviewsController < ApplicationController
   end
 
   def update
-    review = Review.find(params[:id])
-    review.update(review_params)
-    redirect_to admin_campsite_review_path(review.campsite_id,review.id)
+    @review = Review.find(params[:id])
+    if @review.update(review_params)
+      redirect_to admin_campsite_review_path(review.campsite_id,review.id)
+    else
+      render :edit
+    end
   end
 
   def destroy
