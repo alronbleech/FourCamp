@@ -35,11 +35,15 @@ class Public::ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.member_id = current_member.id
     @review.campsite_id = params[:campsite_id]
+    tags = Vision.get_image_data(review_params[:review_image])
     if params[:review][:tag_name] == ""
       flash[:notice] = "季節が入力されていません。"
       render :new
     elsif @review.save
-      tag_list = params[:review][:tag_name].split(',')
+      tags.each do |tag|
+        @review.tags.create(name: tag)
+      end
+      tag_list = (params[:review][:tag_name].split(',') << tags).flatten!
       @review.save_tags(tag_list)
       redirect_to campsite_path(@review.campsite_id)
     else
@@ -51,7 +55,6 @@ class Public::ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     @review.member_id = current_member.id
     @review.campsite_id = params[:campsite_id]
-    p params[:review][:tag_name]
     if params[:review][:tag_name] == ""
       flash[:notice] = "季節が入力されていません。"
       render :edit
