@@ -62,6 +62,11 @@ CampsiteType.create(type_name: "河原")
 CampsiteType.create(type_name: "林間")
 CampsiteType.create(type_name: "湖畔")
 
+Season.create(season_name: "春")
+Season.create(season_name: "夏")
+Season.create(season_name: "秋")
+Season.create(season_name: "冬")
+
 15.times do |n|
   Member.create!(
   email: "test#{n + 1}camp@camp",
@@ -106,16 +111,17 @@ Campsite.create(
     considerations: "毎年夏から秋にかけてクマの目撃情報が寄せられています。クマよけの鈴を配布していますので、お持ちでない方はカウンターまでお越しください。",
     campsite_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-campsite1.jpg"),filename: "sample-campsite1.jpg")
   )
-
+=begin
 10.times do |n|
   review = Review.new(
     member_id: 1,
     campsite_id: 1,
     title: "テストレビュー#{n + 1}",
     star: 4.0,
+    season_id: 
     comment: "気温が高かったが、風があったので快適に過ごせましたが、強風対策は必須です。"
     )
-  tag_list = ["春"]
+  tag_list = ["強風"]
   review.save_tags(tag_list)
   review.save
 end
@@ -126,13 +132,15 @@ end
     campsite_id: 1,
     title: "テストレビュー11",
     star: 4.0,
+    season_id: 
     comment: "気温が高かったが、風があったので快適に過ごせましたが、強風対策は必須です。",
     review_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-review1.jpg"),filename: "sample-review1.jpg")
     )
-  tag_list = ["春"]
+  tag_list = ["夏日"]
   review.save_tags(tag_list)
   review.save
 end
+=end
 
 
 15.times do |n|

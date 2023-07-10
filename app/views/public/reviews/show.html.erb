@@ -27,7 +27,7 @@
       <div class="col-5">
         <table class="table">
           <tr>
-            <th class="border-0 col-4">季節</th>
+            <th class="border-0 col-4">タグ</th>
             <td class="border-0">
               <% @review.tags.each do |tag| %>
                 <%= tag.name %>
@@ -35,7 +35,8 @@
             </td>
           </tr>
           <tr>
-            <td class="border-0"></td>
+            <th class="border-0">季節</th>
+            <td class="border-0"><%= @review.season.season_name %></td>
           </tr>
           <tr>
             <th class="border-0">評価</th>

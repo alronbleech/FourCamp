@@ -9,12 +9,13 @@
       </div>
       <div class="col-3">
         <%= form_with url: campsite_reviews_path(@campsite), method: :get, local: true do |f| %>
+          <span class="font-weight-bold h4">季節</span>
+          <%= f.collection_select :season_id, @seasons, :id, :season_name, { prompt: '選択' }, class: "form-control-sm", style:"width: 100px;" %>
+          <span class="font-weight-bold h4">タグ</span>
           <%= f.text_field :content, class:"form-control-sm align-middle text-center", style:"width: 100px;" %>
-          <%= f.hidden_field :model, :value => "tag" %>
           <%= f.hidden_field :method, :value => "perfect" %>
           <%= f.submit 'レビュー検索', class: "btn btn-primary" %>
         <% end %><br>
-        <strong>※春・夏・秋・冬で入力</strong>
       </div>
     </div>
   </div>

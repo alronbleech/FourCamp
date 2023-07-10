@@ -40,7 +40,13 @@
                 </td>
               </tr>
               <tr>
-                <th class="border-0 text-center"><%= f.label :tag_name, "季節" %></th>
+                <th class="border-0 text-center"><%= f.label :season_id, '季節' %></th>
+                <td class="border-0">
+                  <%= f.select 'season_id', options_for_select(Season.season_names.map {|key, value| [key, value]}), {}, class:"form-control form-control-sm align-middle text-center", style:"width: 70px;" %>
+                </td>
+              </tr>
+              <tr>
+                <th class="border-0 text-center"><%= f.label :tag_name, "タグ" %></th>
                 <td class="border-0">
                   <%= f.text_field :tag_name, class:"form-control form-control-sm align-middle", style:"width: 100px;" %>
                   <span>(春・夏・秋・冬のいずれかを入力してください。)</span>

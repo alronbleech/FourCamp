@@ -19,7 +19,14 @@ class Tag < ApplicationRecord
       tags = Tag.where('name LIKE ?', '%' + content + '%')
     end
 
-    return tags.inject(init = []) {|result, tag| result + tag.reviews}
+    review_ids = []
+    tags.each do |tag|
+      review_ids = review_ids + tag.reviews.ids
+    end
+
+    return review_ids.uniq
+
+    # tags.inject(init = []) {|result, tag| result + tag.reviews}
 
   end
 end

@@ -2,6 +2,7 @@ class Review < ApplicationRecord
 
   belongs_to :campsite
   belongs_to :member
+  belongs_to :season
 
   has_many :tagmaps, dependent: :destroy
   has_many :tags, through: :tagmaps
@@ -13,6 +14,7 @@ class Review < ApplicationRecord
   validates :title, presence: true, length: { maximum: 30 }
   validates :star, presence: true
   validates :comment, presence: true, length: { maximum: 200 }
+  validates :season_id, presence: true
 
   def save_tags(savereview_tags)
     current_tags = self.tags.pluck(:name) unless self.tags.nil?

@@ -6,13 +6,23 @@ class Public::ReviewsController < ApplicationController
   end
 
   def index
-    @model = params[:model]
     @content = params[:content]
     @method = params[:method]
-    if @model == 'tag'
-      @reviews = Tag.search_reviews_for(@content, @method)
-      @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(5)
+    @season_id = params[:season_id]
+
+    @reviews = Review.where(campsite_id: params[:campsite_id])
+
+    if @season_id.present?
+      @reviews = @reviews.where(season_id: @season_id)
     end
+    
+    if @content.present?
+      tag_review_ids = Tag.search_reviews_for(@content, @method)
+      review_ids = @reviews.pluck(:id) & tag_review_ids # [1,2,3] & [3,4,5] => [3]
+      @reviews = Review.where(id: review_ids)
+    end
+
+    @reviews = @reviews.page(params[:page]).per(5)
   end
 
   def show
@@ -35,7 +45,11 @@ class Public::ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.member_id = current_member.id
     @review.campsite_id = params[:campsite_id]
-    tags = Vision.get_image_data(review_params[:review_image])
+    tags = if params[:review][:review_image].present?
+       Vision.get_image_data(review_params[:review_image])
+     else
+       []
+    end
     if params[:review][:tag_name] == ""
       flash[:notice] = "季節が入力されていません。"
       render :new
@@ -56,7 +70,7 @@ class Public::ReviewsController < ApplicationController
     @review.member_id = current_member.id
     @review.campsite_id = params[:campsite_id]
     if params[:review][:tag_name] == ""
-      flash[:notice] = "季節が入力されていません。"
+      flash[:notice] = "タグが入力されていません。"
       render :edit
     elsif @review.save
       tag_list = params[:review][:tag_name].split(',')
@@ -76,7 +90,7 @@ class Public::ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:title, :star, :comment, :review_image)
+    params.require(:review).permit(:title, :star, :comment, :season_id, :review_image)
   end
 
 end
