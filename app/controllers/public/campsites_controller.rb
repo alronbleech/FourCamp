@@ -32,9 +32,26 @@ class Public::CampsitesController < ApplicationController
 
   def show
     @campsite = Campsite.find(params[:id])
-    @reviews = @campsite.reviews
     @tags = Tag.all
     @seasons = Season.all
+
+    @content = params[:content]
+    @method = params[:method]
+    @season_id = params[:season_id]
+
+    @reviews = Review.where(campsite_id: @campsite.reviews)
+
+    if @season_id.present?
+      @reviews = @reviews.where(season_id: @season_id)
+    end
+
+    if @content.present?
+      tag_review_ids = Tag.search_reviews_for(@content, @method)
+      review_ids = @reviews.pluck(:id) & tag_review_ids # [1,2,3] & [3,4,5] => [3]
+      @reviews = Review.where(id: review_ids)
+    end
+
+    @reviews = @reviews.page(params[:page]).per(5)
   end
 
 end

@@ -7,7 +7,6 @@
       </div>
       <div class="col">
         <% if @review.member.id == current_member.id %>
-          <%= link_to "編集", edit_campsite_review_path(@review.campsite_id), class: "btn btn-success" %>
           <%= link_to "削除", campsite_review_path(@review), method: :delete, class: "btn btn-danger", "data-confirm" => "本当に削除しますか？" %>
         <% end %>
       </div>

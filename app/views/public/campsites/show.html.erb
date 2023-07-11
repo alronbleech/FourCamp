@@ -1,72 +1,77 @@
-<div style="height: 655px;">
-  <div class="container-fluid mt-3 mb-3">
-    <div class="row">
-      <div class="col text-center">
-        <span class="h1"><%= @campsite.name %></span>
-      </div>
-      <div class="col-2">
-        <%= link_to "レビューを投稿", new_campsite_review_path(@campsite.id), class: "btn btn-success" %>
-      </div>
-      <div class="col-3">
-        <%= form_with url: campsite_reviews_path(@campsite), method: :get, local: true do |f| %>
-          <span class="font-weight-bold h4">季節</span>
-          <%= f.collection_select :season_id, @seasons, :id, :season_name, { prompt: '選択' }, class: "form-control-sm", style:"width: 100px;" %>
-          <span class="font-weight-bold h4">タグ</span>
-          <%= f.text_field :content, class:"form-control-sm align-middle text-center", style:"width: 100px;" %>
-          <%= f.hidden_field :method, :value => "perfect" %>
-          <%= f.submit 'レビュー検索', class: "btn btn-primary" %>
-        <% end %><br>
-      </div>
+<div class="container-fluid mt-3 mb-3">
+  <div class="row">
+    <div class="col text-center">
+      <span class="h1"><%= @campsite.name %></span>
     </div>
   </div>
+</div>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-2 mt-3 mb-5">
-        <% if @campsite.campsite_image.attached? %>
-          <%= image_tag @campsite.campsite_image, size: "200x200", class: "image-fit" %>
-        <% else %>
-          <%= image_tag asset_path('no_image2.jpg'), size: "200x200" %>
-        <% end %>
-      </div>
-      <div class="col-1"></div>
-      <div class="col-5">
-        <table class="table">
-          <tr>
-            <th class="border-0">種類</th>
-            <td class="border-0"><%= @campsite.campsite_type.type_name %></td>
-          </tr>
-          <tr>
-            <th class="border-0 col-4">県名</th>
-            <td class="border-0"><%= @campsite.prefecture.prefecture_name %></td>
-          </tr>
-          <tr>
-            <th class="border-0">住所</th>
-            <td class="border-0"><%= @campsite.address %></td>
-          </tr>
-          <tr>
-            <th class="border-0">電話番号</th>
-            <td class="border-0"><%= @campsite.phone_number %></td>
-          </tr>
-          <tr>
-            <th class="border-0">アクセス方法</th>
-            <td class="border-0"><%= @campsite.route %></td>
-          </tr>
-        </table>
-      </div>
+<div class="container">
+  <div class="row">
+    <div class="col-2 mt-3 mb-5">
+      <% if @campsite.campsite_image.attached? %>
+        <%= image_tag @campsite.campsite_image, size: "200x200", class: "image-fit" %>
+      <% else %>
+        <%= image_tag asset_path('no_image2.jpg'), size: "200x200" %>
+      <% end %>
+    </div>
+    <div class="col-1"></div>
+    <div class="col-5">
+      <table class="table">
+        <tr>
+          <th class="border-0">種類</th>
+          <td class="border-0"><%= @campsite.campsite_type.type_name %></td>
+        </tr>
+        <tr>
+          <th class="border-0 col-4">県名</th>
+          <td class="border-0"><%= @campsite.prefecture.prefecture_name %></td>
+        </tr>
+        <tr>
+          <th class="border-0">住所</th>
+          <td class="border-0"><%= @campsite.address %></td>
+        </tr>
+        <tr>
+          <th class="border-0">電話番号</th>
+          <td class="border-0"><%= @campsite.phone_number %></td>
+        </tr>
+        <tr>
+          <th class="border-0">アクセス方法</th>
+          <td class="border-0"><%= @campsite.route %></td>
+        </tr>
+      </table>
     </div>
   </div>
+</div>
 
-  <div class="container">
-    <div class="row">
-      <div class="col text-center">
-        <span class="h3">特徴</span>
-        <p class="mt-2"><%= simple_format(@campsite.feature, class: "h4") %></p>
-      </div>
-      <div class="col text-center">
-        <span class="h3">注意事項</span>
-        <p class="mt-2"><%= simple_format(@campsite.considerations, class: "h4") %></p>
-      </div>
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      <span class="h3">特徴</span>
+      <p class="mt-2"><%= simple_format(@campsite.feature, class: "h4") %></p>
+    </div>
+    <div class="col text-center">
+      <span class="h3">注意事項</span>
+      <p class="mt-2"><%= simple_format(@campsite.considerations, class: "h4") %></p>
     </div>
   </div>
+</div>
+<div class="container mt-3 mb-3">
+  <div class="row">
+    <div class="col text-center">
+      <%= link_to "レビューを投稿", new_campsite_review_path(@campsite.id), class: "btn btn-success" %>
+    </div>
+    <div class="col">
+      <%= form_with url: campsite_path(@campsite), method: :get, local: true do |f| %>
+        <span class="font-weight-bold h4">季節</span>
+        <%= f.collection_select :season_id, @seasons, :id, :season_name, { prompt: '選択' }, class: "form-control-sm", style:"width: 100px;" %>
+        <span class="font-weight-bold ml-3 h4">タグ</span>
+        <%= f.text_field :content, class:"form-control-sm align-middle text-center", style:"width: 100px;" %>
+        <%= f.hidden_field :method, :value => "perfect" %>
+        <%= f.submit 'レビュー検索', class: "btn btn-primary" %>
+      <% end %><br>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <%= render 'public/reviews/index', reviews: @reviews %>
 </div>
