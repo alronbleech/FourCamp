@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%= form_with model: @review, url: campsite_reviews_path(@campsite) do |f| %>
+        <table class="table">
+          <tr>
+            <td class="border-0">
+              <%= f.label :review_image, 'レビュー画像', class: "font-weight-bold" %><br>
+              <%= f.file_field :review_image, accept: "image/*" %>
+            </td>
+          </tr>
+          <tr>
+            <td class="border-0">
+              <%= f.label :title, 'レビュータイトル', class: "font-weight-bold" %><br>
+              <%= f.text_field :title, class:"form-control form-control-sm align-middle", style:"width: 400px;" %>
+              <span id="title-count" class="text-right text-top">0 / 30文字</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="border-0">
+              <%= f.label :season_id, '季節', class: "font-weight-bold" %>
+              <%= f.select 'season_id', options_for_select(Season.season_names.map {|key, value| [key, value]}), {}, class:"form-control form-control-sm align-middle text-center", style:"width: 70px;" %>
+            </td>
+          </tr>
+          <tr>
+            <td class="border-0">
+              <%= f.label :tag_name, "タグ", class: "font-weight-bold" %>
+              <%= f.text_field :tag_name, class:"form-control form-control-sm align-middle", style:"width: 100px;" %>
+            </td>
+          </tr>
+          <tr>
+            <td class="border-0">
+              <%= f.label :star, '評価', class:'font-weight-bold' %><br>
+              <span id="star"><%= f.hidden_field :star, id: :review_star %></span>
+            </td>
+            <script>
+            $('#star').empty();
+              raty(document.getElementById('star'), {
+               starOn: '<%= asset_path('star-on.png') %>',
+               starOff: '<%= asset_path('star-off.png') %>',
+               scoreName: 'review[star]',
+               half: false
+              });
+            </script>
+          </tr>
+          <tr>
+            <td class="border-0">
+              <%= f.label :comment, 'コメント' %><br>
+              <%= f.text_area :comment, class:"form-control form-control-sm align-middle", style:"width: 400px; height: 150px;" %>
+              <span id="comment-count" class="text-right text-muted">0 / 200文字</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="border-0">
+              <%= f.submit 'レビュー投稿', class: 'btn btn-success' %>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+            </td>
+          </tr>
+        </table>
+      <% end %>
+    </div>
+  </div>
+</div>
+<%#文字数カウンター%>
+<script>
+  $(document).ready(function() {
+    const textField = $("#review_title");
+    const textArea = $("#review_comment");
+    const titleCount = $("#title-count")
+    const commentCount = $("#comment-count");
+
+    textField.on("input", function() {
+      const count = textField.val().length;
+      titleCount.text(count + " / 30文字");
+    });
+
+    textArea.on("input", function() {
+      const count = textArea.val().length;
+      commentCount.text(count + " / 200文字");
+    });
+  });
+</script>

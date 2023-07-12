@@ -23,8 +23,20 @@ class Public::ReviewsController < ApplicationController
        []
     end
     if params[:review][:tag_name] == ""
-      flash[:notice] = "季節が入力されていません。"
-      render :new
+      flash[:notice] = "タグが入力されていません。"
+      @campsite = Campsite.find(params[:campsite_id])
+      @tags = Tag.all
+      @seasons = Season.all
+      @review = Review.new
+
+      @content = params[:content]
+      @method = params[:method]
+      @season_id = params[:season_id]
+
+      @reviews = Review.where(campsite_id: @campsite.reviews).page(params[:page]).per(5)
+
+      redirect_to campsite_path(@campsite)
+
     elsif @review.save
       tags.each do |tag|
         @review.tags.create(name: tag)
@@ -33,7 +45,17 @@ class Public::ReviewsController < ApplicationController
       @review.save_tags(tag_list)
       redirect_to campsite_path(@review.campsite_id)
     else
-      render :new
+      @campsite = Campsite.find(params[:campsite_id])
+      @tags = Tag.all
+      @seasons = Season.all
+
+      @content = params[:content]
+      @method = params[:method]
+      @season_id = params[:season_id]
+
+      @reviews = Review.where(campsite_id: @campsite.reviews).page(params[:page]).per(5)
+      flash[:error] = @review.errors.full_messages
+      redirect_to campsite_path(@campsite)
     end
   end
 

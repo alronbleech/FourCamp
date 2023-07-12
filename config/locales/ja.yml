@@ -31,6 +31,7 @@ ja:
         feature: "特徴"
         considerations: "注意事項"
       review:
+        season: "季節"
         title: "レビュータイトル"
         star: "☆評価"
         comment: "コメント"

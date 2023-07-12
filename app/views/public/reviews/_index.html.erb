@@ -21,9 +21,12 @@
             <% end %>
           </td>
           <td class="font-weight-bold align-middle">
-            <%= link_to campsite_review_path(review.campsite_id,review.id), class: "text-dark" do %>
+            <%#= link_to campsite_review_path(review.campsite_id,review.id), class: "text-dark" do %>
+              <%#= review.title %>
+            <%# end %>
+            <button type="button" data-toggle="modal" data-target="#reviewModal">
               <%= review.title %>
-            <% end %>
+            </button>
           </td>
           <td class="font-weight-bold align-middle">
             <%= review.season.season_name %>
