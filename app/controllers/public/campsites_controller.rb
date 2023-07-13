@@ -35,12 +35,12 @@ class Public::CampsitesController < ApplicationController
     @tags = Tag.all
     @seasons = Season.all
     @review = Review.new
-    
+
     @content = params[:content]
-    @method = params[:method]
+    @method = params[:search_method]
     @season_id = params[:season_id]
 
-    @reviews = Review.where(campsite_id: @campsite.reviews)
+    @reviews = Review.where(campsite_id: @campsite.id)
 
     if @season_id.present?
       @reviews = @reviews.where(season_id: @season_id)
@@ -48,11 +48,12 @@ class Public::CampsitesController < ApplicationController
 
     if @content.present?
       tag_review_ids = Tag.search_reviews_for(@content, @method)
-      review_ids = @reviews.pluck(:id) & tag_review_ids 
+      review_ids = @reviews.pluck(:id) & tag_review_ids
       @reviews = Review.where(id: review_ids)
     end
 
     @reviews = @reviews.page(params[:page]).per(5)
+    respond_to :html, :js
   end
 
 end

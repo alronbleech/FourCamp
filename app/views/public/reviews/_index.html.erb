@@ -20,13 +20,41 @@
               <%= image_tag asset_path('no_image1.jpg'), size: "100x100" %>
             <% end %>
           </td>
-          <td class="font-weight-bold align-middle">
-            <%#= link_to campsite_review_path(review.campsite_id,review.id), class: "text-dark" do %>
-              <%#= review.title %>
-            <%# end %>
-            <button type="button" data-toggle="modal" data-target="#reviewModal">
+          <td class="align-middle">
+            <button type="button" class="font-weight-bold btn" data-toggle="modal" data-target="#modal-<%= review.id %>">
               <%= review.title %>
             </button>
+            <div class="modal fade" id="modal-<%= review.id %>" tabindex="-1" role="dialog" aria-labelledby="modal-<%= review.id %>-label" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="modal-<%= review.id %>-label">レビュー詳細</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="OK">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p>
+                      <% if review.review_image.attached? %>
+                        <%= image_tag review.review_image, size: "300x300", class: "image-fit" %>
+                      <% else %>
+                        <%= image_tag asset_path('no_image2.jpg'), size: "300x300" %>
+                      <% end %>
+                    </p>
+                    <p>
+                      <strong>コメント</strong><br>
+                      <%= review.comment %>
+                    </p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+                    <% if review.member.id == current_member.id %>
+                      <%= link_to "削除", campsite_review_path(campsite,review), method: :delete, class: "btn btn-danger", "data-confirm" => "本当に削除しますか？" %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
           </td>
           <td class="font-weight-bold align-middle">
             <%= review.season.season_name %>
@@ -52,6 +80,6 @@
       </tbody>
       <% end %>
     </table>
-    <%= paginate reviews %>
+    <%= paginate reviews, remote: true %>
   </div>
 </div>

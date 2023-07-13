@@ -24,7 +24,7 @@ Rails.application.routes.draw do
       resources :contacts, only: [:new, :show, :create]
     end
     resources :campsites, only: [:index, :show] do
-      resources :reviews, only: [:new, :show, :create, :destroy]
+      resources :reviews, only: [:create, :destroy]
     end
   end
 

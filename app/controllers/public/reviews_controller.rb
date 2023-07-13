@@ -1,18 +1,6 @@
 class Public::ReviewsController < ApplicationController
   before_action :authenticate_member!
 
-  def new
-    @review = Review.new
-  end
-
-  def show
-   @review = Review.find_by(id: params[:id])
-    if @review.present?
-    else
-      redirect_to campsites_path
-    end
-  end
-
   def create
     @review = Review.new(review_params)
     @review.member_id = current_member.id
