@@ -17,8 +17,7 @@ class Campsite < ApplicationRecord
   validates :feature, presence: true, length: {minimum: 10}
   validates :considerations, presence: true, length: {minimum: 10}
 
-  #地図機能実装時有効化
-  #validates :latitude, presence: true
-  #validates :longitude, presence: true
-
+  geocoded_by :address
+  after_validation :geocode, if: :address_changed?
+  
 end

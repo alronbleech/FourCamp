@@ -1,70 +1,102 @@
-<div style="height: 655px;">
-  <div class="container mt-3 mb-3">
-    <div class="row">
-      <div class="col">
-        <span class="h1"><%= @campsite.name %></span>
-      </div>
-      <div class="col-2">
-        <%= link_to "編集する", edit_admin_campsite_path(@campsite), class: "btn btn-success" %>
-      </div>
-      <div class="col-4">
-        <%= form_with url: admin_campsite_reviews_path(@campsite), method: :get, local: true do |f| %>
-          <%= f.text_field :content, class:"form-control-sm align-middle text-center", style:"width: 100px;" %>
-          <%= f.hidden_field :model, :value => "tag" %>
-          <%= f.hidden_field :method, :value => "perfect" %>
-          <%= f.submit 'レビュー検索', class: "btn btn-primary" %>
-        <% end %>
-      </div>
+<div class="container mt-3 mb-3">
+  <div class="row">
+    <div class="col">
+      <span class="h1"><%= @campsite.name %></span>
+    </div>
+    <div class="col-2">
+      <%= link_to "編集する", edit_admin_campsite_path(@campsite), class: "btn btn-success" %>
+    </div>
+    <div class="col-4">
+      <%= form_with url: admin_campsite_reviews_path(@campsite), method: :get, local: true do |f| %>
+        <%= f.text_field :content, class:"form-control-sm align-middle text-center", style:"width: 100px;" %>
+        <%= f.hidden_field :model, :value => "tag" %>
+        <%= f.hidden_field :method, :value => "perfect" %>
+        <%= f.submit 'レビュー検索', class: "btn btn-primary" %>
+      <% end %>
     </div>
   </div>
+</div>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-2">
-        <% if @campsite.campsite_image.attached? %>
-          <%= image_tag @campsite.campsite_image, size: "200x200", class: "image-fit" %>
-        <% else %>
-          <%= image_tag asset_path('no_image2.jpg'), size: "200x200" %>
-        <% end %>
-      </div>
-      <div class="col-1"></div>
-      <div class="col-5">
-        <table class="table">
-          <tr>
-            <th class="border-0">種類</th>
-            <td class="border-0"><%= @campsite.campsite_type.type_name %></td>
-          </tr>
-          <tr>
-            <th class="border-0 col-4">県名</th>
-            <td class="border-0"><%= @campsite.prefecture.prefecture_name %></td>
-          </tr>
-          <tr>
-            <th class="border-0">住所</th>
-            <td class="border-0"><%= @campsite.address %></td>
-          </tr>
-          <tr>
-            <th class="border-0">電話番号</th>
-            <td class="border-0"><%= @campsite.phone_number %></td>
-          </tr>
-          <tr>
-            <th class="border-0">アクセス方法</th>
-            <td class="border-0"><%= @campsite.route %></td>
-          </tr>
-        </table>
-      </div>
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+      <% if @campsite.campsite_image.attached? %>
+        <%= image_tag @campsite.campsite_image, size: "200x200", class: "image-fit" %>
+      <% else %>
+        <%= image_tag asset_path('no_image2.jpg'), size: "200x200" %>
+      <% end %>
+    </div>
+    <div class="col-1"></div>
+    <div class="col-8">
+      <table class="table">
+        <tr>
+          <th class="border-0">種類</th>
+          <td class="border-0"><%= @campsite.campsite_type.type_name %></td>
+        </tr>
+        <tr>
+          <th class="border-0 col-4">県名</th>
+          <td class="border-0"><%= @campsite.prefecture.prefecture_name %></td>
+        </tr>
+        <tr>
+          <th class="border-0">住所</th>
+          <td class="border-0"><%= @campsite.address %></td>
+        </tr>
+        <tr>
+          <th class="border-0">電話番号</th>
+          <td class="border-0"><%= @campsite.phone_number %></td>
+        </tr>
+        <tr>
+          <th class="border-0">アクセス方法</th>
+          <td class="border-0"><%= @campsite.route %></td>
+        </tr>
+      </table>
     </div>
   </div>
+</div>
 
-  <div class="container">
-    <div class="row">
-      <div class="col text-center">
-        <span class="h3">特徴</span>
-        <p class="mt-2"><%= simple_format(@campsite.feature, class: "h4") %></p>
-      </div>
-      <div class="col text-center">
-        <span class="h3">注意事項</span>
-        <p class="mt-2"><%= simple_format(@campsite.considerations, class: "h4") %></p>
-      </div>
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      <span class="h3">特徴</span>
+      <p class="mt-2"><%= simple_format(@campsite.feature, class: "h4") %></p>
+    </div>
+    <div class="col text-center">
+      <span class="h3">注意事項</span>
+      <p class="mt-2"><%= simple_format(@campsite.considerations, class: "h4") %></p>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      <div id="map" class="m-auto"></div>
+      <script type="text/javascript">
+        function initMap() {
+          var test ={lat: <%= @campsite.latitude %>, lng: <%= @campsite.longitude %>};
+          var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 15,
+                    center: test
+                    });
+          var transitLayer = new google.maps.TransitLayer();
+          transitLayer.setMap(map);
+
+          var contentString = '住所：<%= @campsite.address %>';
+          var infowindow = new google.maps.InfoWindow({
+            content: contentString
+          });
+          var marker = new google.maps.Marker({
+                        position:test,
+                        map: map,
+                        title: contentString
+                      });
+
+          marker.addListener('click', function() {
+            infowindow.open(map, marker);
+          });
+        }
+      </script>
+      <script async defer src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap"></script>
     </div>
   </div>
 </div>

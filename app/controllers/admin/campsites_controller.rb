@@ -1,5 +1,6 @@
 class Admin::CampsitesController < ApplicationController
   before_action :authenticate_admin!
+
   def new
     @campsite = Campsite.new
   end
@@ -20,6 +21,7 @@ class Admin::CampsitesController < ApplicationController
 
   def show
     @campsite = Campsite.find_by(id: params[:id])
+    @seasons = Season.all
     if @campsite.present?
     else
       redirect_to admin_path
@@ -61,7 +63,20 @@ class Admin::CampsitesController < ApplicationController
   private
 
   def campsite_params
-    params.require(:campsite).permit(:campsite_type_id,:prefecture_id,:name,:address,:phone_number,:route,:feature,:considerations,:campsite_image,:prefecture_name,:type_name)
+    params.require(:campsite).permit(
+      :campsite_type_id,
+      :prefecture_id,
+      :name,
+      :address,
+      :phone_number,
+      :route,
+      :feature,
+      :considerations,
+      :campsite_image,
+      :prefecture_name,
+      :type_name,
+      :latitude,
+      :longitude
+      )
   end
-
 end

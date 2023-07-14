@@ -66,7 +66,7 @@ Season.create(season_name: "春")
 Season.create(season_name: "夏")
 Season.create(season_name: "秋")
 Season.create(season_name: "冬")
-
+=begin
 15.times do |n|
   Member.create!(
   email: "test#{n + 1}camp@camp",
@@ -140,6 +140,8 @@ end
   review.save_tags(tag_list)
   review.save
 end
+=end
+
 
 15.times do |n|
   Contact.create(
