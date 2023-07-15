@@ -20,12 +20,28 @@ class Admin::CampsitesController < ApplicationController
   end
 
   def show
-    @campsite = Campsite.find_by(id: params[:id])
+    @campsite = Campsite.find(params[:id])
+    @tags = Tag.all
     @seasons = Season.all
-    if @campsite.present?
-    else
-      redirect_to admin_path
+
+    @content = params[:content]
+    @method = params[:search_method]
+    @season_id = params[:season_id]
+
+    @reviews = Review.where(campsite_id: @campsite.id)
+
+    if @season_id.present?
+      @reviews = @reviews.where(season_id: @season_id)
     end
+
+    if @content.present?
+      tag_review_ids = Tag.search_reviews_for(@content, @method)
+      review_ids = @reviews.pluck(:id) & tag_review_ids
+      @reviews = Review.where(id: review_ids)
+    end
+
+    @reviews = @reviews.page(params[:page]).per(5)
+    respond_to :html, :js
   end
 
   def edit

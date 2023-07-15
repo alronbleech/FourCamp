@@ -66,7 +66,7 @@ Season.create(season_name: "春")
 Season.create(season_name: "夏")
 Season.create(season_name: "秋")
 Season.create(season_name: "冬")
-=begin
+
 15.times do |n|
   Member.create!(
   email: "test#{n + 1}camp@camp",
@@ -87,26 +87,79 @@ Member.create(
   profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-member1.jpg"),filename: "sample-member1.jpg")
   )
 
-10.times do |n|
   Campsite.create(
     campsite_type_id: 1,
     prefecture_id: 1,
-    name: "campsite in テスト#{n + 1}",
-    address: "テスト市テスト区試作#{n + 1}丁目",
-    phone_number: "6540000111#{n + 1}",
-    route: "テスト駅からテスト町行バスへ乗り徒歩#{n + 1}分",
+    name: "オートリゾート 苫小牧アルテン",
+    address: "北海道苫小牧市樽前421-4",
+    phone_number: "00011111111",
+    route: "テスト駅からテスト町行バスへ乗り徒歩1分",
     feature: "各季節で限定のイベントを行っています！去年の夏はバーベキューで大いに盛り上がりました！！",
     considerations: "毎年夏から秋にかけてクマの目撃情報が寄せられています。クマよけの鈴を配布していますので、お持ちでない方はカウンターまでお越しください。",
     )
-end
+
+  Campsite.create(
+    campsite_type_id: 1,
+    prefecture_id: 1,
+    name: "安平町ときわキャンプ場",
+    address: "北海道勇払郡安平町早来北進98-45",
+    phone_number: "00011111111",
+    route: "札幌から1時間弱、新千歳空港から車でわずか30分",
+    feature: "各季節で限定のイベントを行っています！去年の夏はバーベキューで大いに盛り上がりました！！",
+    considerations: "毎年夏から秋にかけてクマの目撃情報が寄せられています。クマよけの鈴を配布していますので、お持ちでない方はカウンターまでお越しください。",
+    )
+
+  Campsite.create(
+    campsite_type_id: 1,
+    prefecture_id: 1,
+    name: "穂別キャンプ場",
+    address: "北海道勇払郡むかわ町穂別稲里553番地穂別キャンプ場センターハウス",
+    phone_number: "00011111111",
+    route: "高速自動車道・むかわ穂別ICより車で約１１分",
+    feature: "各季節で限定のイベントを行っています！去年の夏はバーベキューで大いに盛り上がりました！！",
+    considerations: "毎年夏から秋にかけてクマの目撃情報が寄せられています。クマよけの鈴を配布していますので、お持ちでない方はカウンターまでお越しください。",
+    )
+
+  Campsite.create(
+    campsite_type_id: 1,
+    prefecture_id: 1,
+    name: "さらべつカントリーパーク",
+    address: "北海道河西郡更別村弘和541番地62",
+    phone_number: "00011111111",
+    route: "新千歳空港→約3時間30分",
+    feature: "各季節で限定のイベントを行っています！去年の夏はバーベキューで大いに盛り上がりました！！",
+    considerations: "毎年夏から秋にかけてクマの目撃情報が寄せられています。クマよけの鈴を配布していますので、お持ちでない方はカウンターまでお越しください。",
+    )
+
+  Campsite.create(
+    campsite_type_id: 1,
+    prefecture_id: 1,
+    name: "ニセコボンゴ広場",
+    address: "北海道虻田郡ニセコ町曽我863-12ボンゴ広場",
+    phone_number: "00011111111",
+    route: "倶知安町方面から道道３４３号線を通って来る場合、写真の点滅信号まで来ましたらそのまま通り過ぎてください。点滅信号を過ぎて１００メールほど進んだ右側にボンゴ広場があります。",
+    feature: "各季節で限定のイベントを行っています！去年の夏はバーベキューで大いに盛り上がりました！！",
+    considerations: "毎年夏から秋にかけてクマの目撃情報が寄せられています。クマよけの鈴を配布していますので、お持ちでない方はカウンターまでお越しください。",
+    )
+
+  Campsite.create(
+    campsite_type_id: 1,
+    prefecture_id: 1,
+    name: "層雲峡オートキャンプ場",
+    address: "北海道上川郡上川町層雲峡清川",
+    phone_number: "00011111111",
+    route: "JR石北本線「旭川駅」から車で約1時間15分",
+    feature: "各季節で限定のイベントを行っています！去年の夏はバーベキューで大いに盛り上がりました！！",
+    considerations: "毎年夏から秋にかけてクマの目撃情報が寄せられています。クマよけの鈴を配布していますので、お持ちでない方はカウンターまでお越しください。",
+    )
 
 Campsite.create(
     campsite_type_id: 2,
-    prefecture_id: 2,
-    name: "campsite in テスト11",
-    address: "テスト市テスト区試作11丁目11-11",
+    prefecture_id: 4,
+    name: "エコキャンプみちのく",
+    address: "宮城県柴田郡川崎町大字川内字向原254番地エコキャンプみちのく",
     phone_number: "654000011111",
-    route: "テスト駅からテスト町行バスへ乗り徒歩11分",
+    route: "仙台宮城IC～宮城川崎IC …… 約20分",
     feature: "各季節で限定のイベントを行っています！去年の夏はバーベキューで大いに盛り上がりました！！",
     considerations: "毎年夏から秋にかけてクマの目撃情報が寄せられています。クマよけの鈴を配布していますので、お持ちでない方はカウンターまでお越しください。",
     campsite_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-campsite1.jpg"),filename: "sample-campsite1.jpg")
@@ -122,8 +175,8 @@ Campsite.create(
     comment: "気温が高かったが、風があったので快適に過ごせましたが、強風対策は必須です。"
     )
   tag_list = ["強風"]
-  review.save_tags(tag_list)
   review.save
+  review.save_tags(tag_list)
 end
 
 1.times do |n|
@@ -137,15 +190,13 @@ end
     review_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-review1.jpg"),filename: "sample-review1.jpg")
     )
   tag_list = ["夏日"]
-  review.save_tags(tag_list)
   review.save
+  review.save_tags(tag_list)
 end
-=end
-
 
 15.times do |n|
   Contact.create(
-    member_id: 2,
+    member_id: 1,
     subject: "テストお問い合わせ#{n + 1}",
     demand: "テストお問い合わせ#{n + 1}テストお問い合わせ#{n + 1}テストお問い合わせ#{n + 1}テストお問い合わせ#{n + 1}"
     )

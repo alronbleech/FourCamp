@@ -31,6 +31,18 @@
               <td class="border-0"><%= f.text_field :title, class:"form-control form-control-sm align-middle", style:"width: 400px;" %></td>
             </tr>
             <tr>
+              <th class="border-0 text-center"><%= f.label :season_id, '季節' %></th>
+              <td class="border-0">
+                <%= f.select 'season_id', options_for_select(Season.season_names.map {|key, value| [key, value]}), {}, class:"form-control form-control-sm align-middle text-center", style:"width: 70px;" %>
+              </td>
+            </tr>
+            <tr>
+              <th class="border-0 text-center"><%= f.label :tag_name, "タグ", class: "font-weight-bold" %></th>
+              <td class="border-0">
+                <%= f.text_field :tag_name, class:"form-control form-control-sm align-middle", style:"width: 100px;" %>
+              </td>
+            </tr>
+            <tr>
               <th class="border-0 text-center"><%= f.label :star, '評価' %></th>
               <td id="star" class="border-0"><%= f.hidden_field :star, id: :review_star %></td>
               <script>

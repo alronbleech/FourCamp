@@ -6,14 +6,6 @@
     <div class="col-2">
       <%= link_to "編集する", edit_admin_campsite_path(@campsite), class: "btn btn-success" %>
     </div>
-    <div class="col-4">
-      <%= form_with url: admin_campsite_reviews_path(@campsite), method: :get, local: true do |f| %>
-        <%= f.text_field :content, class:"form-control-sm align-middle text-center", style:"width: 100px;" %>
-        <%= f.hidden_field :model, :value => "tag" %>
-        <%= f.hidden_field :method, :value => "perfect" %>
-        <%= f.submit 'レビュー検索', class: "btn btn-primary" %>
-      <% end %>
-    </div>
   </div>
 </div>
 
@@ -99,4 +91,23 @@
       <script async defer src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap"></script>
     </div>
   </div>
+</div>
+
+<div class="container mt-3">
+  <div class="row">
+    <div class="col text-center">
+      <%= form_with(url: admin_campsite_path(@campsite), method: :get, data: {remote: true, type: "script"}) do |f| %>
+        <span class="font-weight-bold h4">季節</span>
+        <%= f.collection_select :season_id, @seasons, :id, :season_name, { prompt: '選択' }, class: "form-control-sm", style:"width: 100px;" %>
+        <span class="font-weight-bold ml-3 h4">タグ</span>
+        <%= f.text_field :content, class:"form-control-sm align-middle text-center", style:"width: 100px;" %>
+        <%= f.hidden_field :search_method, :value => "perfect" %>
+        <%= f.submit 'レビュー検索', class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-3" id="admin-review-list">
+  <%= render 'admin/reviews/index', reviews: @reviews, campsite: @campsite %>
 </div>
