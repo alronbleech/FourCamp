@@ -154,8 +154,8 @@ Member.create(
     )
 
 Campsite.create(
-    campsite_type_id: 2,
     prefecture_id: 4,
+    campsite_type_id: 2,
     name: "エコキャンプみちのく",
     address: "宮城県柴田郡川崎町大字川内字向原254番地エコキャンプみちのく",
     phone_number: "654000011111",

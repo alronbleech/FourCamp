@@ -8,31 +8,20 @@ class Admin::CampsitesController < ApplicationController
   def index
     @prefectures = Prefecture.all
     @campsite_types = CampsiteType.all
+
     if params[:prefecture_id].present? && params[:campsite_type_id].present?
       @campsites = Campsite.where(prefecture_id: params[:prefecture_id], campsite_type_id: params[:campsite_type_id]).page(params[:page]).per(5)
-      respond_to do |format|
-        format.html
-        format.js
-      end
     elsif params[:prefecture_id].present?
       @campsites = Campsite.where(prefecture_id: params[:prefecture_id]).page(params[:page]).per(5)
-      respond_to do |format|
-        format.html
-        format.js
-      end
     elsif params[:campsite_type_id].present?
-      @campsites = Campsite.where(prefecture_id: params[:campsite_type_id]).page(params[:page]).per(5)
-      respond_to do |format|
-        format.html
-        format.js
-      end
+      @campsites = Campsite.where(campsite_type_id: params[:campsite_type_id]).page(params[:page]).per(5)
     else
       @campsites = Campsite.page(params[:page]).per(5)
-      respond_to do |format|
+    end
+    respond_to do |format|
         format.html
         format.js
       end
-    end
   end
 
   def show
@@ -71,7 +60,7 @@ class Admin::CampsitesController < ApplicationController
   def create
     @campsite = Campsite.new(campsite_params)
     if @campsite.save
-      redirect_to admin_campsites_path(@campsite.id)
+      redirect_to admin_campsites_path
     else
       render :new
     end
