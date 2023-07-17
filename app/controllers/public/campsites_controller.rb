@@ -1,4 +1,5 @@
 class Public::CampsitesController < ApplicationController
+  before_action :authenticate_member!
 
   def index
     @prefectures = Prefecture.all
